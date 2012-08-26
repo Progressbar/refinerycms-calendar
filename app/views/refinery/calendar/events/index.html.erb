@@ -1,11 +1,12 @@
 <% content_for :body do %>
-  
+
   <%=raw @page.content_for(:body) %>
 
   <% if @events.any? %>
     <section id="events" class="events">
       <%= render :partial => 'event', :collection => @events %>
     </section>
+    <%= will_paginate @events %>
   <% else %>
     <section class="flash info">
       <%= t('.none_events') %>
@@ -19,11 +20,6 @@
 
 <% end %>
 
-<% content_for :side_body do %>
-&nbsp;
-<% end %>
-<% content_for :stylesheets, stylesheet_link_tag('refinerycms-events') %>
-
+<%= render '/refinery/calendar/sidebar' %>
 <%= render '/refinery/content_page' %>
 
-<%#= render 'events/sidebar' %>

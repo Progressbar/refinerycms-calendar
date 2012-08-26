@@ -13,6 +13,8 @@ module Refinery
 			validates :title, :presence => true, :uniqueness => true
 
 			attr_accessible :title
+
+			alias_attribute :name, :title
 		end
 	end
 end

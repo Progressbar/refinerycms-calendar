@@ -1,0 +1,16 @@
+<% content_for :body_content_title do -%>
+  <% date_format = params[:month].present? ? '%B %Y' : '%Y' -%>
+  <%= "#{t('.events_posted_in')} #{@archive_date.strftime(date_format)}" %>
+<% end -%>
+
+<% content_for :body do %>
+	<div id="events">
+		<%= render :partial => 'event', :collection => @events, :locals => { :archive => true } %>
+	</div>
+	<%= will_paginate @events %>
+<% end %>
+
+<%= render '/refinery/calendar/sidebar' %>
+
+<%= render '/refinery/content_page' %>
+

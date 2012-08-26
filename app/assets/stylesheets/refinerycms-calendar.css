@@ -1,0 +1,141 @@
+.event {
+	margin-bottom: 1em;
+	position: relative;
+}
+
+.event-image {
+	float: left;
+}
+
+.event-image a {
+	display: block;
+	border: 0px;
+	padding: 0px;
+	margin: 0px;
+}
+
+.event-image img {
+	border: none;
+	margin: 0px;
+	padding: 0px;
+	width: 150px;
+	height: 150px;
+	display: inherit; /* some weird bug in ff */
+}
+
+.event-detail {
+	margin-left: 165px;
+}
+
+.event-header {
+	margin-bottom: 10px;
+}
+
+.event-header h3 {
+	margin-bottom: 4px;
+}
+
+.event-date {
+	font-style: italic;
+}
+
+.event-footer {	
+	padding: 12px 0;
+}
+
+a.ical {
+	padding: 10px;
+	float: right;
+}
+
+.event-social {
+	color: red;
+}
+
+#event a.ical {
+	padding: 2px;
+}
+
+#events .event {
+	background: inherit; /* todo */
+}
+
+#events .featured {
+	background: inherit; /* todo */
+}
+
+#events .event-description {
+	margin-right: 10px;
+	max-height: 3em;
+	overflow: hidden;
+}
+
+#events p:last-child {
+	margin: 0px;
+}
+
+#events .event-footer {
+	position: absolute;
+	bottom: 0px;
+}
+
+.ui-datepicker-calendar {
+	margin: auto;
+	width: 100%;
+}
+
+.ui-datepicker-calendar th {
+	padding: 6px 12px;
+}
+
+.ui-datepicker-calendar td {
+	padding: 0px;
+}
+
+.ui-datepicker-header { position: relative; padding: 6px 0; }
+.ui-datepicker-prev, 
+.ui-datepicker-next { 
+	position: absolute; 
+	text-decoration: underline; 
+	cursor: pointer;
+}
+
+.ui-datepicker-prev { left: 0px; }
+.ui-datepicker-next { right: 0px; }
+.ui-datepicker-prev span, 
+.ui-datepicker-next span { }
+.ui-datepicker-title { text-align: center; }
+
+.ui-datepicker td span, 
+.ui-datepicker td a { 
+	display: block; 
+	text-align: right; 
+	text-decoration: none; 
+	padding: 6px 12px;
+}
+
+.ui-datepicker td span {
+	font-size: small;
+}
+
+.ui-datepicker td a {
+	font-weight: bold;
+}
+
+#refinery-calendar-holder {
+	min-height: 300px;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+}
+
+#refinery-calendar-holder.load {
+	background-image: url(refinery/ajax-loader.gif);
+}
+
+#refinery-calendar-holder.error {
+	background-image: url(refinery/icons/delete.png);
+}
+
+#refinery-calendar-dialog {
+	padding-top: 1em;
+}

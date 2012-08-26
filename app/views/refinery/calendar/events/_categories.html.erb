@@ -1,0 +1,10 @@
+<% if @categories.any? %>
+  <aside class="sidebar_module categories">
+    <h2><%= t('.categories') %></h2>
+    <ul>
+      <% @categories.each do |category| -%>
+        <li><%= category.name %></li>
+      <% end -%>
+    </ul>
+  </aside><!-- categories -->
+<% end %>

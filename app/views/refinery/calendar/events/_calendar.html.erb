@@ -1,0 +1,12 @@
+<% content_for :javascripts, javascript_include_tag('refinery/calendar/calendar.js') %>
+<aside class="sidebar_module calendar" id="refinery-calendar-holder">&nbsp;</aside>
+<% content_for :javascripts do %>
+<script>
+
+	var cfg = {
+		holder : $('#refinery-calendar-holder')
+	};
+
+    var AppCalendar = refinery.Calendar(cfg);
+</script>
+<% end %>

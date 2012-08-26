@@ -93,7 +93,9 @@ module Refinery
       end
 
       def sanitize_description
-        self[:description] = sanitize(self[:description].to_s, :tags => Calendar.allowed_tags, :attributes => Calendar.allowed_tag_attributes)
+        self[:description] = sanitize(self[:description].to_s, 
+            :tags => Calendar.html_allowed_tags, 
+            :attributes => Calendar.html_allowed_tag_attributes)
       end
 
     end
