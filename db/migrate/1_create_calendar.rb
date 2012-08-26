@@ -11,7 +11,6 @@ class CreateCalendar < ActiveRecord::Migration
 
       # extra fields
       t.string :slug
-      t.string :excerpt
       t.boolean :featured,        :null => false, :default => false
       t.decimal :ticket_price, :precision => 8, :scale => 2
       t.string :ticket_link
