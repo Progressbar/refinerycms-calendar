@@ -1,8 +1,42 @@
-<%= div_for event do -%>
-  <time class="date" datetime="<%= event.from %>">
-    <%= event.from.strftime('%b %d').html_safe %>
-  </time>
+<%
+featured ||= false
+individual ||= false
+archive ||= false
+category ||= false
 
-  <h1><%= link_to event.title, refinery.calendar_event_path(event) %></h1>
-  <p><%= event.excerpt %></p>
+event_class = 'clearfix'
+event_class << ' featured' if event.featured?
+
+-%>
+
+<%= div_for event, :class => event_class do -%>
+  <div class="event-image" >
+  <%= link_to refinery.calendar_event_path(event) do -%>
+    <% if event.image %>
+      <%= image_fu event.image, "150x150#c" %>
+    <% else %>    
+      <img src="/assets/default_event.png" width="150" height="150" />
+    <% end %>
+  <% end %>
+  </div>
+  <div class="event-detail">
+    <header class="header event-header">
+      <%= link_to refinery.calendar_event_path(event, :format => :ics), :class => 'ical', :title => 'ICAL' do -%>
+        <img src="/assets/refinery/icons/add.png" alt="ical">
+      <% end %>
+      <h3><%= link_to event.title, refinery.calendar_event_path(event) %></h3>
+      <div class="event-date">
+        <%= smart_date_for(event) %>
+      </div>
+    </header>
+    <div class="event-description">
+      <%= simple_format(truncate strip_tags(event.description), :length => ::Refinery::Calendar.events_desc_length) %>
+    </div>
+    <footer class="footer event-footer">
+      <div class="event-social">
+        Share event
+      </div>
+    </footer>
+  </div>
 <% end -%>
+

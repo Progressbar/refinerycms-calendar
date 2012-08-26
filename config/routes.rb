@@ -1,36 +1,24 @@
 Refinery::Core::Engine.routes.append do
-
-  # Frontend routes
-  namespace :calendar, :path => 'connect' do
-    get 'events/archive' => 'events#archive'
-    resources :events, :only => [:index, :show]
-  end
-
-  # Admin routes
-  namespace :calendar, :path => '' do
-    namespace :admin, :path => 'refinery/calendar' do
-      resources :events, :except => :show do
-        collection do
-          post :update_positions
-        end
-      end
-    end
-  end
-
-
-  # Frontend routes
   namespace :calendar do
-    resources :venues, :only => [:index, :show]
+    root :to => "events#index"
+    
+    get 'category/:id' => 'categories#show', :as => 'category'
+
+    resources :events, :path => '', :only => [:show]
+    # get 'archive/:year(/:month)' => 'events#archive', :as => 'archive'
+    
+    # match 'feed.rss', :to => 'events#index', :as => 'rss_feed', :defaults => {:format => "rss"}
+    # match 'categories/:id', :to => 'categories#show', :as => 'category'
+    # get 'archive/:year(/:month)', :to => 'events#archive', :as => 'archive_events'
   end
 
   # Admin routes
-  namespace :calendar, :path => '' do
+  
+  namespace :calendar, :path => '' do    
     namespace :admin, :path => 'refinery/calendar' do
-      resources :venues, :except => :show do
-        collection do
-          post :update_positions
-        end
-      end
+      resources :events, :except => :show
+      resources :places, :except => :show
+      resources :categories, :except => :show
     end
   end
 

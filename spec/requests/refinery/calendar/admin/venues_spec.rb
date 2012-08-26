@@ -4,17 +4,17 @@ require "spec_helper"
 describe Refinery do
   describe "Calendar" do
     describe "Admin" do
-      describe "venues" do
+      describe "places" do
         login_refinery_user
 
-        describe "venues list" do
+        describe "places list" do
           before(:each) do
-            FactoryGirl.create(:venue, :name => "UniqueTitleOne")
-            FactoryGirl.create(:venue, :name => "UniqueTitleTwo")
+            FactoryGirl.create(:place, :name => "UniqueTitleOne")
+            FactoryGirl.create(:place, :name => "UniqueTitleTwo")
           end
 
           it "shows two items" do
-            visit refinery.calendar_admin_venues_path
+            visit refinery.calendar_admin_places_path
             page.should have_content("UniqueTitleOne")
             page.should have_content("UniqueTitleTwo")
           end
@@ -22,9 +22,9 @@ describe Refinery do
 
         describe "create" do
           before(:each) do
-            visit refinery.calendar_admin_venues_path
+            visit refinery.calendar_admin_places_path
 
-            click_link "Add New Venue"
+            click_link "Add New Place"
           end
 
           context "valid data" do
@@ -33,7 +33,7 @@ describe Refinery do
               click_button "Save"
 
               page.should have_content("'This is a test of the first string field' was successfully added.")
-              Refinery::Calendar::Venue.count.should == 1
+              Refinery::Calendar::Place.count.should == 1
             end
           end
 
@@ -42,36 +42,36 @@ describe Refinery do
               click_button "Save"
 
               page.should have_content("Name can't be blank")
-              Refinery::Calendar::Venue.count.should == 0
+              Refinery::Calendar::Place.count.should == 0
             end
           end
 
           context "duplicate" do
-            before(:each) { FactoryGirl.create(:venue, :name => "UniqueTitle") }
+            before(:each) { FactoryGirl.create(:place, :name => "UniqueTitle") }
 
             it "should fail" do
-              visit refinery.calendar_admin_venues_path
+              visit refinery.calendar_admin_places_path
 
-              click_link "Add New Venue"
+              click_link "Add New Place"
 
               fill_in "Name", :with => "UniqueTitle"
               click_button "Save"
 
               page.should have_content("There were problems")
-              Refinery::Calendar::Venue.count.should == 1
+              Refinery::Calendar::Place.count.should == 1
             end
           end
 
         end
 
         describe "edit" do
-          before(:each) { FactoryGirl.create(:venue, :name => "A name") }
+          before(:each) { FactoryGirl.create(:place, :name => "A name") }
 
           it "should succeed" do
-            visit refinery.calendar_admin_venues_path
+            visit refinery.calendar_admin_places_path
 
             within ".actions" do
-              click_link "Edit this venue"
+              click_link "Edit this place"
             end
 
             fill_in "Name", :with => "A different name"
@@ -83,15 +83,15 @@ describe Refinery do
         end
 
         describe "destroy" do
-          before(:each) { FactoryGirl.create(:venue, :name => "UniqueTitleOne") }
+          before(:each) { FactoryGirl.create(:place, :name => "UniqueTitleOne") }
 
           it "should succeed" do
-            visit refinery.calendar_admin_venues_path
+            visit refinery.calendar_admin_places_path
 
-            click_link "Remove this venue forever"
+            click_link "Remove this place forever"
 
             page.should have_content("'UniqueTitleOne' was successfully removed.")
-            Refinery::Calendar::Venue.count.should == 0
+            Refinery::Calendar::Place.count.should == 0
           end
         end
 

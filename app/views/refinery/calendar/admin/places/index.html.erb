@@ -1,0 +1,7 @@
+<%= render '/refinery/calendar/admin/submenu' %>
+
+<section id='records'>
+  <h2>Calendar: Places</h2>
+  <%= render 'records' %>
+</section>
+<%= render '/refinery/admin/make_sortable', :tree => false if !searching? and ::Refinery::Calendar::Admin::PlacesController.sortable? and ::Refinery::Calendar::Place.count > 1 %>

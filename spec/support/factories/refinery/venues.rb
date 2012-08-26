@@ -1,6 +1,6 @@
 
 FactoryGirl.define do
-  factory :venue, :class => Refinery::Calendar::Venue do
+  factory :place, :class => Refinery::Calendar::Place do
     sequence(:name) { |n| "refinery#{n}" }
   end
 end

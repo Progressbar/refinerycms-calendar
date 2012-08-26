@@ -1,44 +1,12 @@
+<h2>Calendar: Event</h2>
 <%= form_for [refinery, :calendar_admin, @event] do |f| -%>
   <%= render '/refinery/admin/error_messages',
               :object => @event,
               :include_object_name => true %>
 
-
   <div class='field'>
     <%= f.label :title -%>
     <%= f.text_field :title, :class => 'larger widest'  -%>
-  </div>
-
-  <div class="field">
-    <p>
-      <%= f.check_box :featured %>
-      <%= f.label :featured, :class => 'stripped' %>
-    </p>
-  </div>
-
-  <div class='field'>
-    <%= f.label :from -%>
-    <%= f.text_field :from, :class => 'datetime_range'  -%>
-  </div>
-
-  <div class='field'>
-    <%= f.label :to -%>
-    <%= f.text_field :to, :class => 'datetime_range'  -%>
-  </div>
-
-  <div class='field'>
-    <%= f.label :registration_link -%>
-    <%= f.text_field :registration_link, :class => 'larger'  -%>
-  </div>
-
-  <div class='field'>
-    <%= f.label :venue_id, 'Venue' %>
-    <%= f.collection_select :venue_id, @venues, :id, :name, { :include_blank => 'None' }, :class => 'chzn-select', :'data-placeholder' => 'Search Venues', :style => 'width: 300px;' %>
-  </div>
-
-  <div class='field'>
-    <%= f.label :excerpt -%>
-    <%= f.text_area :excerpt, :size => '65x5'  -%>
   </div>
 
   <div class='field'>
@@ -58,9 +26,92 @@
         <% end %>
       </div>
     </div>
-
   </div>
 
+  <%= render '/refinery/admin/form_advanced_options_menu', :f => f %>
+
+  <div id='more_options' style="display:nones;">
+    <div class="hemisquare">
+
+      <div class='field'>
+        <h3><%= t('title', :scope => 'refinery.calendar.admin.submenu.categories') %></h3>
+        
+        <% if @categories.any? %>
+        <ul class="categories" style="padding-left: 0px; list-style: none;margin-left: 0px;">
+          <% @categories.each do |category| %>
+          <li>
+             <%= check_box_tag 'event[category_ids][]', category.id,
+                               @event.categories.include?(category),
+                               :id => (id="event_category_ids_#{category.id}") %>
+             <%= label_tag 'event[category_ids][]', category.title,
+                           :class => 'stripped',
+                           :for => id %>
+          </li>
+          <% end %>
+        </ul>
+        <% else %>
+        <p>
+          <%= t('no_items_yet', :scope => 'refinery.calendar.admin.categories.records') %>
+        </p>
+        <% end %>
+      </div>
+
+      <div class='field'>
+        <h3><%= t('title', :scope => 'refinery.calendar.admin.submenu.places') %></h3>
+        <% if @places.any? %>       
+          <%= f.select :location_id, @places.map { |p| [p.title, p.id] } %>
+        <% else %>
+          <p>
+            <%= t('no_items_yet', :scope => 'refinery.calendar.admin.places.records') %>
+          </p>
+        <% end %>
+      </div>
+
+      <div class='field'>
+        <%= f.label :published_at -%>
+        <%= f.datetime_select :published_at %>
+      </div>
+      
+      <div class="field">
+        <%= f.check_box :featured %>
+        <%= f.label :featured, :class => 'stripped' %>
+      </div>
+
+    </div>
+    <div class='hemisquare right_side'>
+
+      
+    </div>
+  </div>
+
+  <div class="clearfix">
+    <div class="hemisquare">
+
+      <div class='field'>
+        <%= f.label :start_date -%>
+        <%= f.datetime_select :start_date, :default => Time.now.tomorrow.change(:hour => 18, :minute => 0) %>
+      </div>
+
+      <div class='field'>
+        <%= f.label :end_date -%>
+        <%= f.datetime_select :end_date, :default => Time.now.tomorrow.change(:hour => 20, :minute => 0) %>
+      </div>
+
+    </div>
+    <div class='hemisquare right_side'>
+
+      <div class='field'>
+        <%= f.label :image -%>
+        <%= render :partial => "/refinery/admin/image_picker", :locals => {
+              :f => f,
+              :field => :image_id,
+              :image => @event.image,
+              :toggle_image_display => false
+            } %>
+      </div>
+
+    </div>
+  </div>
   <%= render '/refinery/admin/form_actions', :f => f,
              :continue_editing => false,
              :delete_title => t('delete', :scope => 'refinery.events.admin.events.event'),
@@ -76,7 +127,7 @@
     $(document).ready(function(){
       page_options.init(false, '', '');
 
-      $('#event_venue_id').chosen({
+      $('#event_place_id').chosen({
         no_results_text: "No results matched",
         allow_single_deselect: true
       });

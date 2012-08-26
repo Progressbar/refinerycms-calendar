@@ -1,9 +1,9 @@
 <% if searching? %>
   <h2><%= t('results_for', :scope => 'refinery.admin.search', :query => params[:search]) %></h2>
 <% end %>
-<div class="pagination_container" >
-  <% if @events.any? %>
-    <%= render 'events' %>
+<div class='pagination_container'>
+  <% if @places.any? %>
+    <%= render 'places' %>
   <% else %>
     <p>
       <% unless searching? %>

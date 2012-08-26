@@ -3,6 +3,8 @@ require 'refinerycms-core'
 module Refinery
   autoload :CalendarGenerator, 'generators/refinery/calendar_generator'
 
+  require 'refinery/configuration'
+
   module Events
     require 'refinery/events/engine'
 

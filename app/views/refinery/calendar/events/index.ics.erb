@@ -1,0 +1,34 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//iCalendar export//EN
+BEGIN:VTIMEZONE
+TZID:<%= ::Refinery::Calendar.events_timezone %>
+BEGIN:STANDARD
+DTSTART:19710101T030000
+TZOFFSETFROM:+0200
+TZOFFSETTO:+0100
+RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU
+END:STANDARD
+BEGIN:DAYLIGHT
+DTSTART:19710101T020000
+TZOFFSETFROM:+0100
+TZOFFSETTO:+0200
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU
+END:DAYLIGHT
+END:VTIMEZONE
+<% @events.each do |event| %>
+BEGIN:VEVENT
+UID:<%= event.id %>@<%= request.host %>
+SUMMARY:<%= event.title %>
+DESCRIPTION:<%= truncate(strip_tags(event.description.gsub(/\n/," ").gsub(/\r/," ")), :length => 200) %>
+LOCATION:<%= event.place.title %>
+URL:<%= refinery.calendar_event_url(event) %>
+STATUS:CONFIRMED
+CLASS:PUBLIC
+TZID=<%= ::Refinery::Calendar.events_timezone %>
+DTSTART:<%= event.start_date.strftime('%Y%m%dT%H%M%S') %>
+DTEND:<%= event.end_date.strftime('%Y%m%dT%H%M%S') %>
+DTSTAMP:<%= event.start_date.strftime('%Y%m%dT%H%M%S') %>
+END:VEVENT
+<% end %>
+END:VCALENDAR

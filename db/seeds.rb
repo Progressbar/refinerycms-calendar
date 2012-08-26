@@ -1,6 +1,6 @@
 if defined?(::Refinery::User)
   ::Refinery::User.all.each do |user|
-    if user.plugins.where(:name => 'refinerycms-calendar').blank?
+    if user.plugins.where(:name => 'refinerycms-calendar').blank? 
       user.plugins.create(:name => 'refinerycms-calendar',
                           :position => (user.plugins.maximum(:position) || -1) +1)
     end
@@ -8,10 +8,10 @@ if defined?(::Refinery::User)
 end
 
 
-url = "/calendar/venues"
+url = "/calendar"
 if defined?(::Refinery::Page) && ::Refinery::Page.where(:link_url => url).empty?
   page = ::Refinery::Page.create(
-    :title => 'Venues',
+    :title => 'Calendar',
     :link_url => url,
     :deletable => false,
     :menu_match => "^#{url}(\/|\/.+?|)$"
@@ -20,7 +20,3 @@ if defined?(::Refinery::Page) && ::Refinery::Page.where(:link_url => url).empty?
     page.parts.create(:title => default_page_part, :body => nil, :position => index)
   end
 end
-
-
-# Added by Refinery CMS Pages extension
-Refinery::Pages::Engine.load_seed

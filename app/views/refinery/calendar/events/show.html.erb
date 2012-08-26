@@ -1,28 +1,55 @@
 <% content_for :body_content_title do %>
   <%= @event.title %>
 <% end %>
+<% content_for :body do %>
 
-<% content_for :body_content_left do %>
-  <h4>Event details</h4>
-  <h5><%= @event.venue_name %></h5>
-
-  <p>From <%= @event.from.strftime('%B %d, %Y %I:%M%p') %> to
-      <br><%= @event.to.strftime('%B %d, %Y %I:%M%p') %></p>
-
-  <% if @event.registration_link.present? %>
-    <p><%= link_to 'Register for this event', @event.registration_link %></p>
-  <% end -%>
-
-  <% if @event.venue_address.present? %>
-    <p><%= link_to 'View it on a map', "http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=#{CGI::escape(@event.venue.address)}&ie=UTF8&z=16" %></p>
-  <% end -%>
-
-  <div class="event_description">
-    <h4><%= @event.excerpt %></h4>
-    <%=raw @event.description %>
+<div  id="event" class="event clearfix">
+  <div class="event-content">
+    <div class="event-image" >
+      <% if @event.image %>
+        <%= image_fu @event.image, "150x150#c" %>
+      <% else %>    
+        <img src="/assets/default_event.png" width="150" height="150" />
+      <% end %>
+    </div>
+    <div class="event-detail">
+      <header class="event-header">
+        <%= link_to refinery.calendar_event_path(@event, :format => :ics), :class => 'ical', :title => 'ical export' do -%>
+          <img src="/assets/refinery/icons/add.png" alt="ical">
+        <% end %>
+        <div class="event-date">
+          <%= smart_date_for(@event) %>
+        </div>
+      </header>
+      <div class="event-description">
+        <%= sanitize(@event.description.to_s, :tags => ::Refinery::Calendar.allowed_tags, :attributes => ::Refinery::Calendar.allowed_tag_attributes) %>
+      </div>
+      <% if @event.place.present? %>
+        <div class="event-place">
+          <%= @event.place.title %>
+        </div>
+      <% end -%>
+      <% if @event.categories.any? %>
+        <div class="event-categories">
+          <% @event.categories.each do |category| -%>
+            <span class="category"><%= category.title %></span>
+          <% end -%>
+        </div>
+      <% end %>
+      <footer class="footer event-footer">
+        <div class="event-social">
+          Share event
+        </div>
+      </footer>
+    </div>
   </div>
+</div>
 <% end %>
 
-<% content_for :stylesheets, stylesheet_link_tag('events') %>
+<% content_for :side_body do %>
+&nbsp;
+<% end %>
+
+<% content_for :stylesheets, stylesheet_link_tag('refinerycms-events') %>
 
 <%= render '/refinery/content_page' %>

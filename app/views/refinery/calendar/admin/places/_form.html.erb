@@ -1,0 +1,84 @@
+<h2>Calendar: Place</h2>
+<%= form_for [refinery, :calendar_admin, @place] do |f| -%>
+  <%= render '/refinery/admin/error_messages',
+              :object => @place,
+              :include_object_name => true %>
+
+
+  <div class="field">
+    <%= f.label :name -%>
+    <%= f.text_field :name, :class => 'larger widest'  -%>
+  </div>
+
+  <div class="field">
+    <%= f.label :description -%>
+    <%= f.text_field :description, :class => 'larger widest'  -%>
+  </div>
+  <br />
+  <div class="clearfix">
+    <div class="hemisquare">
+      <div class="field">
+        <%= f.label :address_country -%>
+        <%= f.text_field :address_country -%>
+      </div>
+      <div class="field">
+        <%= f.label :address_locality -%>
+        <%= f.text_field :address_locality -%>
+      </div>
+      <div class="field">
+        <%= f.label :address_region -%>
+        <%= f.text_field :address_region -%>
+      </div>
+      <div class="field">
+        <%= f.label :postal_code -%>
+        <%= f.text_field :postal_code -%>
+      </div>
+      <div class="field">
+        <%= f.label :street_address -%>
+        <%= f.text_field :street_address -%>
+      </div>
+    </div>
+
+    <div class='hemisquare right_side'>
+
+      <div class="field">
+        <%= f.label :url -%>
+        <%= f.text_field :url, :class => 'widest' -%>
+      </div>
+
+      <div class="field">
+        <%= f.label :phone -%>
+        <%= f.text_field :phone -%>
+      </div>
+
+      <div class="field">
+        <%= f.label :email -%>
+        <%= f.text_field :email -%>
+      </div>
+
+      <div class="field">
+        <%= f.label :latitude -%>
+        <%= f.text_field :latitude -%> <br />
+        <%= f.label :longitude -%>
+        <%= f.text_field :longitude -%>
+      </div>
+
+      <div class='field'>
+        <%= f.label :image -%>
+        <%= render :partial => "/refinery/admin/image_picker", :locals => {
+              :f => f,
+              :field => :image_id,
+              :image => @place.image,
+              :toggle_image_display => false
+            } %>
+      </div>
+      
+    </div>
+  </div>
+
+
+  <%= render '/refinery/admin/form_actions', :f => f,
+             :continue_editing => false,
+             :delete_title => t('delete', :scope => 'refinery.places.admin.places.place'),
+             :delete_confirmation => t('message', :scope => 'refinery.admin.delete', :title => @place.name) %>
+<% end -%>

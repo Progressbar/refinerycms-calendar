@@ -1,0 +1,52 @@
+<nav id='actions' class='multilist'>
+  <ul class='search_list'>
+    <li class='not_a_link'>
+      <%= render "/refinery/admin/search", :url => refinery.calendar_admin_events_path %>
+    </li>
+  </ul>
+
+  <ul class='collapsible_menu'>
+    <li class='not_a_link'>
+      <%= link_to t('.events.title'), '#',
+                  :class => '' %>
+    </li>
+    <li>
+      <%= link_to t('.events.manage'), refinery.calendar_admin_events_path,
+                  :class => 'manage_icon' %>
+    </li>
+    <li>
+      <%= link_to t('.events.new'), refinery.new_calendar_admin_event_path,
+                  :class => "add_icon" %>
+    </li>
+  </ul>
+  
+  <ul class='collapsible_menu'>
+    <li class='not_a_link'>
+      <%= link_to t('.categories.title'), '#',
+                  :class => 'folder_icon' %>
+    </li>
+    <li>
+      <%= link_to t('.categories.manage'), refinery.calendar_admin_categories_path,
+                  :class => 'folder_edit_icon' %>
+    </li>
+    <li>
+      <%= link_to t('.categories.new'), refinery.new_calendar_admin_category_path,
+                  :class => 'folder_add_icon' %>
+    </li>
+  </ul>
+
+  <ul class='collapsible_menu'>
+    <li class='not_a_link'>
+      <%= link_to t('.places.title'), '#',
+                  :class => '' %>
+    </li>
+    <li>
+      <%= link_to t('.places.manage'), refinery.calendar_admin_places_path,
+                  :class => '' %>
+    </li>
+    <li>
+      <%= link_to t('.places.new'), refinery.new_calendar_admin_place_path,
+                  :class => '' %>
+    </li>
+  </ul>
+</nav>
