@@ -17,7 +17,7 @@ module Refinery
         before_filter :check_category_ids, :only => :update
 
         # todo before filter check acl
-        before_filter :check_acl, :only => [:edit, :update]
+        before_filter :check_acl, :only => [:edit, :update, :destroy]
 
         def create
           @event = Refinery::Calendar::Event.new(params[:event])

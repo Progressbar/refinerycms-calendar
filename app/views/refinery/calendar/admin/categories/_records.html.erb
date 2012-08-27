@@ -1,0 +1,15 @@
+<div class='pagination_container'>
+  <% if @categories.any? %>
+    <%= will_paginate @categories %>
+
+    <%= render "sortable_list" %>
+
+    <%= will_paginate @categories %>
+  <% else %>
+    <p>
+      <strong>
+        <%= t('.no_items_yet', :create => t('new', :scope => 'refinery.calendar.admin.submenu.categories')) %>
+      </strong>
+    </p>
+  <% end %>
+</div>
