@@ -139,6 +139,15 @@ refinery.Calendar = function (config) {
         init : function() {
             var that = this;
             holder.html('');
+            if (typeof $.datepicker === 'undefined') {
+                var msg = 'Calendar require jQuery UI Datepicker.';
+                msg += '<br>Please add to your <b>application.js</b>:<br >';
+                msg += '<code>//= require jquery-ui</code>';
+
+                holder.html(msg);
+                return false;
+            }
+
             this.datepicker = $('<div id="refinery-jquery-ui-calendar" />').appendTo(holder);
             this.dialog = new refinery.Calendar.Dialog(holder);
 
