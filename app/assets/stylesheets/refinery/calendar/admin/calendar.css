@@ -1,0 +1,19 @@
+.calendar_icon {
+    background-image: url("/assets/icons/calendar.png");
+}
+.calendar_add_icon {
+    background-image: url("/assets/icons/calendar_add.png");
+}
+.calendar_edit_icon {
+    background-image: url("/assets/icons/calendar_edit.png");
+}
+
+.place_icon {
+    background-image: url("/assets/icons/building.png");
+}
+.place_add_icon {
+    background-image: url("/assets/icons/building_add.png");
+}
+.place_edit_icon {
+    background-image: url("/assets/icons/building_edit.png");
+}

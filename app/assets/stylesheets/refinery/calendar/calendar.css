@@ -90,21 +90,12 @@ a.ical {
 	color: red;
 }
 
-
 #event a.ical {
 	padding: 2px;
 }
 
 #events {
 	margin-bottom: 2em;
-}
-
-#events .event {
-	background: inherit; /* todo */
-}
-
-#events .featured {
-	background: inherit; /* todo */
 }
 
 #events .event-description {
@@ -188,14 +179,28 @@ a.ical {
 	background-position: 50% 50%;
 }
 
+#refinery-calendar-dialog {
+	padding-top: 1em;
+}
+
 #refinery-calendar-holder.load {
-	background-image: url(refinery/ajax-loader.gif);
+	background-image: url(/assets/refinery/ajax-loader.gif);
 }
 
 #refinery-calendar-holder.error {
-	background-image: url(refinery/icons/delete.png);
+	background-image: url(/assets/icons/application_error.png);
 }
 
-#refinery-calendar-dialog {
-	padding-top: 1em;
+.calendar-icon {
+	padding-left: 22px;
+	background-repeat: no-repeat;
+	background-position: top left;
+}
+
+.calendar-feed-icon {
+	background-image: url(/assets/icons/feed.png);
+}
+
+.calendar-ical-icon {
+	background-image: url(/assets/icons/date.png);
 }

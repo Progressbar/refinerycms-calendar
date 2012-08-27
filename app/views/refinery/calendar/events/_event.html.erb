@@ -22,7 +22,7 @@ event_class << ' featured' if event.featured?
   <div class="event-detail">
     <header class="header event-header">
       <%= link_to refinery.calendar_event_path(event, :format => :ics), :class => 'ical', :title => 'ICAL' do -%>
-        <img src="/assets/refinery/icons/add.png" alt="ical">
+        <img src="/assets/icons/date_add.png" alt="ical">
       <% end %>
       <h3><%= link_to event.title, refinery.calendar_event_path(event) %></h3>
       <div class="event-date">

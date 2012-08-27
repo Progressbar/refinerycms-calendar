@@ -1,3 +1,5 @@
+<% content_for :stylesheets, stylesheet_link_tag('refinery/calendar/admin/calendar') %>
+
 <nav id='actions' class='multilist'>
   <ul class='search_list'>
     <li class='not_a_link'>
@@ -8,15 +10,15 @@
   <ul class='collapsible_menu'>
     <li class='not_a_link'>
       <%= link_to t('.events.title'), '#',
-                  :class => '' %>
+                  :class => 'calendar_icon' %>
     </li>
     <li>
       <%= link_to t('.events.manage'), refinery.calendar_admin_events_path,
-                  :class => 'manage_icon' %>
+                  :class => 'calendar_edit_icon' %>
     </li>
     <li>
       <%= link_to t('.events.new'), refinery.new_calendar_admin_event_path,
-                  :class => "add_icon" %>
+                  :class => "calendar_add_icon" %>
     </li>
   </ul>
   <% if user_can_modify_categories %>
@@ -39,16 +41,17 @@
   <ul class='collapsible_menu'>
     <li class='not_a_link'>
       <%= link_to t('.places.title'), '#',
-                  :class => '' %>
+                  :class => 'place_icon' %>
     </li>
     <li>
       <%= link_to t('.places.manage'), refinery.calendar_admin_places_path,
-                  :class => '' %>
+                  :class => 'place_edit_icon' %>
     </li>
     <li>
       <%= link_to t('.places.new'), refinery.new_calendar_admin_place_path,
-                  :class => '' %>
+                  :class => 'place_add_icon' %>
     </li>
   </ul>
   <% end %>
 </nav>
+
