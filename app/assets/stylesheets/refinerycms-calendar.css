@@ -1,3 +1,41 @@
+.thing {
+	margin-bottom: 1em;
+}
+
+.thing-image {
+	float: left;
+}
+
+.thing-image a {
+	display: block;
+	border: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+.thing-image img {
+	border: none;
+	margin: 0px;
+	padding: 0px;
+	width: 150px;
+	height: 150px;
+	display: inherit; /* some weird bug in ff */
+}
+
+.thing-detail {
+	margin-left: 165px;
+}
+
+.thing-header {
+	margin-bottom: 10px;
+}
+
+.thing-footer {	
+	padding: 12px 0;
+}
+
+
+/* event */
 .event {
 	margin-bottom: 1em;
 	position: relative;
@@ -52,8 +90,13 @@ a.ical {
 	color: red;
 }
 
+
 #event a.ical {
 	padding: 2px;
+}
+
+#events {
+	margin-bottom: 2em;
 }
 
 #events .event {
@@ -77,6 +120,23 @@ a.ical {
 #events .event-footer {
 	position: absolute;
 	bottom: 0px;
+}
+
+.events-list {
+	margin-bottom: 2em;
+}
+
+.events-list .event:last-child {
+	margin-bottom: 0px;
+}
+
+#archives ul {
+    float: left;
+    width: 30%;
+}
+
+#archives ul:nth-of-type(3n + 1) {
+	clear: left;
 }
 
 .ui-datepicker-calendar {

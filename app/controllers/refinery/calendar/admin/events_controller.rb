@@ -1,25 +1,28 @@
 module Refinery
   module Calendar
     module Admin
-      class EventsController < ::Refinery::AdminController
+      class EventsController < CalendarController
 
         crudify :'refinery/calendar/event',
-                :xhr_paging => true,
-                :sortable => false,
-                :order => "'start_date' DESC"
+          :xhr_paging => true,
+          :sortable => false,
+          :order => "'start_date' DESC"
 
         before_filter :find_all_categories,
-                      :only => [:new, :edit, :create, :update]
+          :only => [:new, :edit, :create, :update]
 
         before_filter :find_all_places,
-                      :only => [:new, :edit, :create, :update]
+          :only => [:new, :edit, :create, :update]
 
         before_filter :check_category_ids, :only => :update
 
+        # todo before filter check acl
+        before_filter :check_acl, :only => [:edit, :update]
+
         def create
           @event = Refinery::Calendar::Event.new(params[:event])
-          @event[:user_id] = current_refinery_user      
-          
+          @event[:user_id] = current_refinery_user.id
+
           if @event.valid? && @event.save
                       
             (request.xhr? ? flash.now : flash).notice = t(
@@ -45,10 +48,10 @@ module Refinery
               render :new
             else
               render :partial => "/refinery/admin/error_messages",
-                     :locals => {
-                       :object => @event,
-                       :include_object_name => true
-                     }
+                :locals => {
+                :object => @event,
+                :include_object_name => true
+              }
             end
           end
         end
@@ -67,6 +70,9 @@ module Refinery
           params[:event][:category_ids] ||= []
         end
 
+        def check_acl
+          error_404 unless user_can_modify_event(@event)
+        end
       end
     end
   end

@@ -4,22 +4,26 @@
 
   <% if @events.any? %>
     <section id="events" class="events">
-      <%= render :partial => 'event', :collection => @events %>
+      <div class="events-list">
+        <%= render :partial => 'event', :collection => @events %>
+      </div>
+
+      <%= will_paginate @events %>
     </section>
-    <%= will_paginate @events %>
+
   <% else %>
     <section class="flash info">
       <%= t('.none_events') %>
     </section>
   <% end %>
-
-  <section id="archives">
-  <%#= events_archive_list %>
-  
-  </section>
+  <% if @archive_events_dates.any? %>
+    <section id="archives" class="clearfix" >
+      <h2><%= t('.archives') %></h2>
+      <%= events_archive_list(@archive_events_dates) %>
+    </section>
+  <% end %>
 
 <% end %>
 
 <%= render '/refinery/calendar/sidebar' %>
 <%= render '/refinery/content_page' %>
-

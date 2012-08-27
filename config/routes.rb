@@ -4,10 +4,10 @@ Refinery::Core::Engine.routes.append do
     
     get 'archive/:year(/:month)' => 'events#archive', :as => 'archive'
     get 'category/:id' => 'categories#show', :as => 'category'
+    get 'place/:id' => 'places#show', :as => 'place'
 
     resources :events, :path => '', :only => [:show]
     
-    # match 'feed.rss', :to => 'events#index', :as => 'rss_feed', :defaults => {:format => "rss"}
   end
 
   # Admin routes

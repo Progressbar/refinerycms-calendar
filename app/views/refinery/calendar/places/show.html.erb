@@ -1,0 +1,60 @@
+<% content_for :body_content_title do %>
+  <%= @place.title %>
+<% end %>
+<% content_for :body do %>
+
+<div id="place" class="thing place clearfix">
+  <div class="thing-content place-content">
+    <div class="thing-image place-image" >
+      <% if @place.image %>
+        <%= image_fu @place.image, "150x150#c" %>
+      <% else %>    
+        <img src="/assets/default_place.png" width="150" height="150" />
+      <% end %>
+    </div>
+    <div class="thing-detail place-detail">
+      <header class="thing-header place-header">      
+      </header>
+      <div class="thing-description place-description">
+        <p>
+          <%= sanitize(@place.description.to_s, 
+                    :tags => ::Refinery::Calendar.html_allowed_tags, 
+                    :attributes => ::Refinery::Calendar.html_allowed_tag_attributes) %>
+        </p>
+        <h3>Postal address</h3>
+        <address class="vcard">
+            <h4>
+              <a href="<%= @place.url %>" class="url fn org "><%= @place.name %></a>
+            </h4>
+            <p class="adr">
+              <% if @place.street_address.present? %><span class="street-address"><%= @place.street_address %></span>,<br /><% end %>
+              <span>
+                  <% if @place.address_locality.present? %><span class="locality"><%= @place.address_locality %></span>, <% end %>
+                  <% if @place.address_region.present? %>
+                    <span class="region"><%= @place.address_region %></span>,<br />
+                  <% else %>
+                    <br />
+                  <% end %>
+                  <% if @place.postal_code.present? %><span class="postal-code"><%= @place.postal_code %></span>,<br /><% end %>
+              </span>
+              <% if @place.address_country.present? %><span class="country-name"><%= @place.address_country %></span><br /><% end %>
+            </p>
+        </address>
+      </div>
+      <footer class="footer thing-footer place-footer">
+        <% if @place.latitude.present? && @place.longitude.present? %>
+        <span class="geo">
+          GPS: 
+          <abbr title="<%= @place.latitude %>" class="latitude"><%= @place.latitude %></abbr>
+          <abbr title="<%= @place.longitude %>" class="longitude"><%= @place.longitude %></abbr>
+        </span>
+        <% end %>
+
+      </footer>
+    </div>
+  </div>
+</div>
+<% end %>
+
+<%= render '/refinery/calendar/sidebar' %>
+<%= render '/refinery/content_page' %>

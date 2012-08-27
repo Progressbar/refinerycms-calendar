@@ -28,13 +28,13 @@
       </div>
       <% if @event.place.present? %>
         <div class="event-place">
-          <%= @event.place.title %>
+          <%= link_to @event.place.title, refinery.calendar_place_path(@event.place) %></span>
         </div>
       <% end -%>
       <% if @event.categories.any? %>
         <div class="event-categories">
           <% @event.categories.each do |category| -%>
-            <span class="category"><%= category.title %></span>
+            <span class="category"><%= link_to category.name, refinery.calendar_category_path(category) %></span>&nbsp;
           <% end -%>
         </div>
       <% end %>

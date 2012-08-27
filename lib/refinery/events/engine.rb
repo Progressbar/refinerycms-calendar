@@ -6,9 +6,9 @@ module Refinery
 
       engine_name :refinery_calendar
 
-      initializer "register refinerycms_events plugin" do
+      initializer "register refinerycms_calendar plugin" do
         Refinery::Plugin.register do |plugin|
-          plugin.name = "calendar"
+          plugin.name = "refinerycms_calendar"
           plugin.url = proc { Refinery::Core::Engine.routes.url_helpers.calendar_admin_events_path }
           plugin.pathname = root
           plugin.activity = {

@@ -1,1 +1,24 @@
-xx
+<% content_for :body_content_title do -%>
+  <%= "#{@category.title}" %>
+<% end -%>
+<% content_for :body do %>
+
+  <% if @category_events.any? %>
+    <section id="events" class="events">
+      <div class="events-list">
+        <%= render :partial => '/refinery/calendar/events/event', :collection => @category_events %>
+      </div>
+
+      <%= will_paginate @category_events %>
+    </section>
+    
+  <% else %>
+    <section class="flash info">
+      <%= t('.none_events') %>
+    </section>
+  <% end %>
+  
+<% end %>
+
+<%= render '/refinery/calendar/sidebar' %>
+<%= render '/refinery/content_page' %>

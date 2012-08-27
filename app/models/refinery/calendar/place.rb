@@ -1,6 +1,10 @@
 module Refinery
   module Calendar
     class Place < Refinery::Core::BaseModel
+
+      extend FriendlyId
+      friendly_id :name, :use => [:slugged]
+
       has_many :events
 	    belongs_to :image, :class_name => 'Refinery::Image', :foreign_key => :image_id
 	  
@@ -13,8 +17,8 @@ module Refinery
 
       def title
         title = self.name
-        title << ", #{self.street_address}" if self.street_address.present?
-        title << ", #{self.address_locality}" if self.address_locality.present?
+        title += ", #{self.street_address}" if self.street_address.present?
+        title += ", #{self.address_locality}" if self.address_locality.present?
         title
       end
 

@@ -1,9 +1,7 @@
 en:
   refinery:
     plugins:
-      places:
-        title: Places
-      calendar:
+      refinerycms_calendar:
         title: Calendar
     calendar:
       strftime: '%A, %e %B, %H:%M'

@@ -2,7 +2,6 @@ module Refinery
   module Calendar
 
     class Event < Refinery::Core::BaseModel
-      include ActionView::Helpers::SanitizeHelper
 
       extend FriendlyId
 
@@ -26,8 +25,6 @@ module Refinery
                       :image_id, :category_ids, :location_id
 
       acts_as_indexed :fields => [:title, :description]
-
-      before_save :sanitize_description
 
       def current?
         end_date >= Time.now
@@ -81,21 +78,20 @@ module Refinery
           with_exclusive_scope { order('start_date DESC').where 'start_date between ? and ?', archive_date.beginning_of_month, archive_date.end_of_month }
         end
         
+        def by_year archive_date
+          where(['start_date between ? and ?', archive_date.beginning_of_year, archive_date.end_of_year])
+        end
+
         def for_archive_list
           with_exclusive_scope { order('start_date DESC').where(['end_date < ?', Time.now.beginning_of_month]) }
         end
+
       end
 
       private
 
       def ends_after_start
         errors.add(:base, "End at date must be after the start at date") if end_date < start_date
-      end
-
-      def sanitize_description
-        self[:description] = sanitize(self[:description].to_s, 
-            :tags => Calendar.html_allowed_tags, 
-            :attributes => Calendar.html_allowed_tag_attributes)
       end
 
     end

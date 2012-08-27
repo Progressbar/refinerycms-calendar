@@ -3,7 +3,7 @@
     <h2><%= t('.categories') %></h2>
     <ul>
       <% @categories.each do |category| -%>
-        <li><%= category.name %></li>
+        <li><%= link_to category.name, refinery.calendar_category_path(category) %></li>
       <% end -%>
     </ul>
   </aside><!-- categories -->

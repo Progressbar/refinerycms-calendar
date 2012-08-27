@@ -10,7 +10,7 @@ class CreateCalendar < ActiveRecord::Migration
       t.datetime :end_date
 
       # extra fields
-      t.string :slug
+      t.string :slug,             :null => false
       t.boolean :featured,        :null => false, :default => false
       t.decimal :ticket_price, :precision => 8, :scale => 2
       t.string :ticket_link
@@ -31,7 +31,7 @@ class CreateCalendar < ActiveRecord::Migration
 
     create_table Refinery::Calendar::Category.table_name, :id => true do |t|
       t.string :title, :null => false
-      t.string :slug
+      t.string :slug,  :null => false
 
       t.timestamps
     end
@@ -43,12 +43,14 @@ class CreateCalendar < ActiveRecord::Migration
       t.integer :calendar_event_id,    :null => false
     end
     
-    create_table Refinery::Calendar::Place.table_name do |t|
+    create_table Refinery::Calendar::Place.table_name, :id => true do |t|
       # Properties from Thing http://www.schema.org/Thing
       t.string :name, :null => false
+      t.string :slug, :null => false
       t.text   :description
       t.string :url
       t.integer :image_id
+      t.string :slug
 
       # Properties from ContactPoint http://www.schema.org/ContactPoint
       t.string :phone
@@ -68,13 +70,14 @@ class CreateCalendar < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index Refinery::Calendar::Place.table_name, :name, :unique => true
+    add_index Refinery::Calendar::Place.table_name, :name
+    add_index Refinery::Calendar::Place.table_name, :slug, :unique => true
 
   end
 
   def down
     if defined?(Refinery::UserPlugin)
-      Refinery::UserPlugin.destroy_all({:name => "refinerycms-calendar"})
+      Refinery::UserPlugin.destroy_all({:name => "refinerycms_calendar"})
     end
 
     if defined?(Refinery::Page)

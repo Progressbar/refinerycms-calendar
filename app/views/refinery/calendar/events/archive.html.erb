@@ -1,6 +1,6 @@
 <% content_for :body_content_title do -%>
   <% date_format = params[:month].present? ? '%B %Y' : '%Y' -%>
-  <%= "#{t('.events_posted_in')} #{@archive_date.strftime(date_format)}" %>
+  <%= "#{t('.events_in')} #{@archive_date.strftime(date_format)}" %>
 <% end -%>
 
 <% content_for :body do %>
@@ -11,6 +11,4 @@
 <% end %>
 
 <%= render '/refinery/calendar/sidebar' %>
-
 <%= render '/refinery/content_page' %>
-
