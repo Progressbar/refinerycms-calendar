@@ -15,6 +15,9 @@ module Refinery
     # acl
     config_accessor :refinery_user_can_manage_events, :refinery_user_can_manage_categories, :refinery_user_can_manage_places
 
+    # evils
+    config_accessor :social_buttons
+
     self.categories = true
     self.places = true
     self.facebook_events = false
@@ -31,5 +34,7 @@ module Refinery
     self.refinery_user_can_manage_events = false
     self.refinery_user_can_manage_categories = false
     self.refinery_user_can_manage_places = false
+
+    self.social_buttons = true
   end
 end

@@ -7,3 +7,9 @@ href='#{refinery.calendar_root_url(:format => :rss)}' />".html_safe -%>
 title='#{Refinery::Core.site_name + ' ' + t('.events')}'
 href='#{refinery.calendar_root_url(:format => :ics)}' />".html_safe -%>
 
+<% content_for :javascripts do %>
+	<script type="text/javascript" src="https://platform.twitter.com/widgets.js"></script>
+	<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+	<script type="text/javascript" src="https://connect.facebook.net/en_US/all.js#xfbml=1"></script>
+<% end if Refinery::Calendar.social_buttons %>
+

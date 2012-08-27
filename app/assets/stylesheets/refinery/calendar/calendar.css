@@ -204,3 +204,13 @@ a.ical {
 .calendar-ical-icon {
 	background-image: url(/assets/icons/date.png);
 }
+
+.share-btn {
+    margin-right: 10px;
+    display: inline-block;
+    vertical-align: top;
+    min-width: 40px;
+    min-height: 30px;
+    overflow-x: hidden;
+    max-width: 90px;
+}

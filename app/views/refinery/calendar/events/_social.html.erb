@@ -1,0 +1,31 @@
+<% 
+	msg = "#{Refinery::Core.site_name} Event: #{event.title}. More on: #{refinery.calendar_event_path(event)}" 
+	g_data_size = 'tall'
+	g_data_annotation = individual ? 'bubble' : 'none' 
+
+	t_data_size = individual ? 'large' : 'tall' 
+	t_data_count = individual ? 'vertical' : 'none' 
+
+%>
+
+<div class="event-social">
+	<span class="share-btn twitter">
+		<a href="https://twitter.com/share" class="twitter-share-button" 
+		data-url="<%= refinery.calendar_event_path(event) unless individual %>"
+		data-text="<%= msg %>" data-count="<%= t_data_count %>">Tweet</a>
+	</span>
+	<span class="share-btn google">
+		<div class="g-plusone" data-size="<%= g_data_size %>" data-text="<%= msg %>"
+	 data-annotation="<%= g_data_annotation %>" data-href="<%= refinery.calendar_event_path(event) %>"></div>
+	</span>
+	
+	<span class="share-btn facebook">
+		<div id="fb-root"></div>
+		<% if individual %>
+		  <fb:like href="<%= refinery.calendar_event_path(event) %>" send="false" layout="box_count" width="60" height="64" show_faces="false" action="recommend" font="arial"></fb:like></span>
+		<% else %>
+		 <fb:like href="<%= refinery.calendar_event_path(event) %>" send="false" layout="button_count" width="60" height="32" show_faces="false" action="recommend" font="arial"></fb:like></span>
+		<% end %>
+
+	</span>
+</div>

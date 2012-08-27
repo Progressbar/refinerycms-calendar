@@ -33,9 +33,7 @@ event_class << ' featured' if event.featured?
       <%= simple_format(truncate strip_tags(event.description), :length => ::Refinery::Calendar.events_desc_length) %>
     </div>
     <footer class="footer event-footer">
-      <div class="event-social">
-        Share event
-      </div>
+      <%= render 'social', :event => event, :individual => false if ::Refinery::Calendar.social_buttons %>
     </footer>
   </div>
 <% end -%>
