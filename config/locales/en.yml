@@ -54,9 +54,18 @@ en:
             manage: Manage places
             new: Add New Place
       events:
+        categories:
+          categories: Categories
+        subscribe:
+          subscribe: Subscribe
+        latest:
+          latest_events: Upcomming Events
+        archive:
+          events_in: Events in
+      categories:
         show:
-          other: Other Events
-
+          category: Category
+          none_events: None events in this category
   activerecord:
     attributes:
       refinery/calendar/place:
