@@ -16,6 +16,7 @@ module Refinery
 
       validates :title, :presence => true
       validates :published_at, :presence => true
+      validates :start_date, :end_date, :presence => true
       validate :ends_after_start
 
       alias_attribute :title, :name
