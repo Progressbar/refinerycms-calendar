@@ -2,23 +2,15 @@ source "http://rubygems.org"
 
 gemspec
 
-gem 'refinerycms', '~> 2.0.0'
-
-# Refinery/rails should pull in the proper versions of these
-group :assets do
-  gem 'sass-rails'
-  gem 'coffee-rails'
-  gem 'uglifier'
-end
-
-gem 'jquery-rails'
+gem 'refinerycms', :path => '../refinerycms/', :branch => 'form_adv_opt_snippet'
+gem 'refinerycms-i18n', :git => 'git://github.com/parndt/refinerycms-i18n.git'
+gem 'refinerycms-settings', :git => 'git://github.com/parndt/refinerycms-settings.git'
 
 group :development, :test do
-  gem 'refinerycms-testing', '~> 2.0.0'
-  gem 'factory_girl_rails'
-  gem 'generator_spec'
-
   require 'rbconfig'
+
+  gem 'refinerycms-testing', :git => 'git://github.com/resolve/refinerycms.git'
+  gem 'guard-rspec', '~> 1.1.0'
 
   platforms :jruby do
     gem 'activerecord-jdbcsqlite3-adapter'
@@ -28,9 +20,7 @@ group :development, :test do
   end
 
   unless defined?(JRUBY_VERSION)
-    group :development, :test do
-  gem 'sqlite3'
-end
+    gem 'sqlite3'
     gem 'mysql2'
     gem 'pg'
   end
@@ -42,17 +32,17 @@ end
   end
 
   platforms :ruby do
-    gem 'spork', '0.9.0.rc9'
-    gem 'guard-spork'
+    gem 'guard-spork', '~> 1.1.0'
 
     unless ENV['TRAVIS']
       if RbConfig::CONFIG['target_os'] =~ /darwin/i
-        gem 'rb-fsevent', '>= 0.3.9'
-        gem 'growl',      '~> 1.0.3'
+        gem 'rb-fsevent', '~> 0.9.1'
+        gem 'ruby_gntp',  '~> 0.3.4'
       end
       if RbConfig::CONFIG['target_os'] =~ /linux/i
-        gem 'rb-inotify', '>= 0.5.1'
-        gem 'libnotify',  '~> 0.1.3'
+        gem 'rb-inotify', '~> 0.8.8'
+        gem 'libnotify',  '~> 0.7.4'
+        gem 'therubyracer', '~> 0.10.1'
       end
     end
   end
@@ -60,12 +50,21 @@ end
   platforms :jruby do
     unless ENV['TRAVIS']
       if RbConfig::CONFIG['target_os'] =~ /darwin/i
-        gem 'growl',      '~> 1.0.3'
+        gem 'ruby_gntp',  '~> 0.3.4'
       end
       if RbConfig::CONFIG['target_os'] =~ /linux/i
-        gem 'rb-inotify', '>= 0.5.1'
-        gem 'libnotify',  '~> 0.1.3'
+        gem 'rb-inotify', '~> 0.8.8'
+        gem 'libnotify',  '~> 0.7.4'
       end
     end
   end
 end
+
+# Refinery/rails should pull in the proper versions of these
+group :assets do
+  gem 'sass-rails'
+  gem 'coffee-rails'
+  gem 'uglifier'
+end
+
+gem 'jquery-rails'

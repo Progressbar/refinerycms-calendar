@@ -22,7 +22,7 @@ module Refinery
     self.places = true
     self.facebook_events = false
 
-    self.events_per_page = 2
+    self.events_per_page = 14
     self.events_per_dialog = 14
     self.events_per_admin_index = 20
     self.events_desc_length = 120
