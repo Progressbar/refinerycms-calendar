@@ -17,3 +17,7 @@
 .place_edit_icon {
     background-image: url("/assets/icons/building_edit.png");
 }
+
+.folder_icon      { background-image: url('/assets/icons/folder.png');}                                                                                                  
+.folder_add_icon  { background-image: url('/assets/icons/folder_add.png');}                                  
+.folder_edit_icon { background-image: url('/assets/icons/folder_edit.png'); 
