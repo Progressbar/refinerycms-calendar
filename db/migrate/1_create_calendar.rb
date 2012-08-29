@@ -27,6 +27,8 @@ class CreateCalendar < ActiveRecord::Migration
     end
 
     add_index Refinery::Calendar::Event.table_name, :name
+    add_index Refinery::Calendar::Event.table_name, :published_at
+    add_index Refinery::Calendar::Event.table_name, :start_date
     add_index Refinery::Calendar::Event.table_name, :slug, :unique => true
 
     create_table Refinery::Calendar::Category.table_name, :id => true do |t|
