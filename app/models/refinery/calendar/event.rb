@@ -61,6 +61,10 @@ module Refinery
           where('start_date >= ?', Time.now)
         end
 
+        def today
+          where('start_date between ? and ?', Time.now.beginning_of_day, Time.now.end_of_day)
+        end
+
         def featured
           where(:featured => true)
         end

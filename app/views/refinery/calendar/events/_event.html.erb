@@ -5,7 +5,7 @@ archive ||= false
 category ||= false
 
 event_class = 'clearfix'
-event_class << ' featured' if event.featured?
+event_class += ' highlight' if event.featured?
 
 -%>
 

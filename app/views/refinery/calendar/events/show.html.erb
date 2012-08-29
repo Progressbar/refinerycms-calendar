@@ -2,9 +2,14 @@
   <%= @event.title %>
 <% end %>
 <% content_for :body do %>
+<%
 
-<div  id="event" class="event clearfix">
-  <div class="event-content">
+event_class = 'event'
+event_class += ' highlight' if @event.featured?
+
+-%>
+<div  id="event" class="<%= event_class %>">
+  <div class="event-content clearfix" style="margin-bottom: 2em;">
     <div class="event-image" >
       <% if @event.image %>
         <%= image_fu @event.image, "150x150#c" %>
@@ -43,6 +48,36 @@
       </footer>
     </div>
   </div>
+  <nav id="prevnext_nav">
+    <span class="prev third">
+      <% if @event.prev.present? -%>
+        <%= link_to refinery.calendar_event_path(@event.prev), :class => "prev button" do -%>
+          &laquo; Previous <strong><%=truncate @event.prev.title, :length => 20 %></strong>
+        <% end -%>
+      <% else -%>
+        <span class="prev disabled button">
+          &laquo; Previous
+        </span>
+      <% end -%>
+    </span>
+
+    <%= link_to refinery.calendar_root_url, :class => "home button" do -%>
+      Events home
+    <% end -%>
+
+    <span class="next third">
+      <% if @event.next.present? -%>
+        <%= link_to refinery.calendar_event_path(@event.next), :class => "next button" do -%>
+          Next <strong>
+            <%=truncate @event.next.title, :length => 20 %></strong> &raquo;
+        <% end -%>
+      <% else -%>
+        <span class="next disabled button">
+          Next &raquo;
+        </span>
+      <% end -%>
+    </span>
+  </nav><!--#event_nav-->  
 </div>
 <% end %>
 

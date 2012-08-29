@@ -214,3 +214,28 @@ a.ical {
     overflow-x: hidden;
     max-width: 90px;
 }
+
+
+#event #prevnext_nav {
+    clear: both;
+    display: block;
+    margin-bottom: 2em;
+    text-align: center;
+}
+
+#event .button {
+	display: inline-block;
+	padding: 5px 10px 6px;
+}
+
+#event #prevnext_nav .prev {
+    float: left;
+}
+
+#event #prevnext_nav .next {
+    float: right;
+}
+
+#event #prevnext_nav .third {
+    width: 40%;
+}
