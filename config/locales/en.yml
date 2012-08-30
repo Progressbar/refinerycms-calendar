@@ -62,9 +62,11 @@ en:
           latest_events: Upcomming Events
         archive:
           events_in: Events in
+        index:
+          archives: Archives
       categories:
         show:
-          category: Category
+          events_in_category: Events in category
           none_events: None events in this category
   activerecord:
     attributes:
