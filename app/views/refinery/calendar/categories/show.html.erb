@@ -1,6 +1,6 @@
-<% content_for :body_content_title do -%>
-  <%= "#{t('.category')}: #{@category.title}" %>
-<% end -%>
+<% title = "#{t('.events_in_category')}: #{@category.title}" -%>
+<% content_for :title, title %>
+<% content_for :body_content_title, title %>
 <% content_for :body do %>
 
   <% if @category_events.any? %>

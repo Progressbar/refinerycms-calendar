@@ -1,7 +1,7 @@
-<% content_for :body_content_title do -%>
-  <% date_format = params[:month].present? ? '%B %Y' : '%Y' -%>
-  <%= "#{t('.events_in')} #{@archive_date.strftime(date_format)}" %>
-<% end -%>
+<% date_format = params[:month].present? ? '%B %Y' : '%Y' -%>
+<% title = "#{t('.events_in')} #{@archive_date.strftime(date_format)}" -%>
+<% content_for :title, title %>
+<% content_for :body_content_title, title %>
 
 <% content_for :body do %>
 	<div id="events">

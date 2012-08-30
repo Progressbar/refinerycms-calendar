@@ -1,6 +1,5 @@
-<% content_for :body_content_title do %>
-  <%= @event.title %>
-<% end %>
+<% content_for :title, @event.title %>
+<% content_for :body_content_title, @event.title %>
 <% content_for :body do %>
 <%
 
