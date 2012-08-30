@@ -58,6 +58,15 @@ module Refinery
 
         private
 
+        def admin?
+          true # we're in the admin base controller, so always true.
+        end
+
+        # for: "undefined method `searching?' for #<Refinery::Calendar::Admin::EventsController:0xcb61578>"
+        def searching?
+          params[:search].present?
+        end
+
         def find_all_categories
           @categories = Refinery::Calendar::Category.find(:all)
         end
