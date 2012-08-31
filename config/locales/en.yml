@@ -63,6 +63,7 @@ en:
         archive:
           events_in: Events in
         index:
+          none_events: None events
           archives: Archives
       categories:
         show:
