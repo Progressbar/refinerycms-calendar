@@ -73,12 +73,20 @@
 	margin-bottom: 4px;
 }
 
+.event-header h3 a {
+    overflow: hidden;
+    white-space: nowrap;
+    -o-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+
 .event-date {
 	font-style: italic;
 }
 
 .event-footer {	
-	padding: 12px 0;
+	padding: 0;
 }
 
 a.ical {
