@@ -6,7 +6,7 @@ module Refinery
         crudify :'refinery/calendar/event',
           :xhr_paging => true,
           :sortable => false,
-          :order => "'start_date' DESC"
+          :order => 'start_date DESC'
 
         before_filter :find_all_categories,
           :only => [:new, :edit, :create, :update]
