@@ -89,6 +89,10 @@
 	padding: 0;
 }
 
+.event-place, .event-categories {
+	margin-bottom: 1em;
+}
+
 a.ical {
 	padding: 10px;
 	float: right;
