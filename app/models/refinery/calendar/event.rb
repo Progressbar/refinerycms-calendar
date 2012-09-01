@@ -23,7 +23,7 @@ module Refinery
 
       attr_accessible :title, :description, :start_date, :end_date,
                       :draft, :published_at, :featured, :position,
-                      :image_id, :category_ids, :location_id
+                      :image_id, :category_ids, :location_id, :user_id
 
       acts_as_indexed :fields => [:title, :description]
 
