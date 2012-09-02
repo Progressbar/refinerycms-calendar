@@ -1,5 +1,6 @@
 .thing {
 	margin-bottom: 1em;
+	position: relative;
 }
 
 .thing-image {
@@ -22,6 +23,20 @@
 	display: inherit; /* some weird bug in ff */
 }
 
+.thing-header h3, .thing-header h2 {
+	padding-top: 0;
+	font-size: 115%;
+	margin-bottom: 4px;
+}
+
+.thing-header h3 a {
+    overflow: hidden;
+    white-space: nowrap;
+    -o-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+
 .thing-detail {
 	margin-left: 165px;
 }
@@ -30,102 +45,40 @@
 	margin-bottom: 10px;
 }
 
-.thing-footer {	
-	padding: 12px 0;
-}
+.thing-footer { }
 
-
-/* event */
-.event {
-	margin-bottom: 1em;
-	position: relative;
-}
-
-.event-image {
-	float: left;
-}
-
-.event-image a {
-	display: block;
-	border: 0px;
-	padding: 0px;
-	margin: 0px;
-}
-
-.event-image img {
-	border: none;
-	margin: 0px;
-	padding: 0px;
-	width: 150px;
-	height: 150px;
-	display: inherit; /* some weird bug in ff */
-}
-
-.event-detail {
-	margin-left: 165px;
-}
-
-.event-header {
-	margin-bottom: 10px;
-}
-
-.event-header h3, .event-header h2 {
-	padding-top: 0;
-	font-size: 115%;
-	margin-bottom: 4px;
-}
-
-.event-header h3 a {
-    overflow: hidden;
-    white-space: nowrap;
-    -o-text-overflow: ellipsis;
-    -ms-text-overflow: ellipsis;
-    text-overflow: ellipsis;
-}
-
-.event-footer {	
-	padding: 0;
-}
-
-.event-categories {
+.thing-categories {
 	margin-bottom: 2em;
 }
 
+.thing-date {
+	font-style: italic;
+}
+
+/* event */
+
 a.ical {
-	padding: 10px;
+	padding: 2px;
 	float: right;
 }
-
-.event-social {
-	color: red;
-}
-
-#event a.ical {
-	padding: 2px;
-}
-
 
 #events {
 	margin-bottom: 2em;
 }
 
-#events .event-description {
+#events .thing-description {
 	margin-right: 10px;
 	max-height: 3em;
 	overflow: hidden;
 }
 
-#events p:last-child {
-	margin: 0px;
-}
-
-#events .event-footer {
+#events .thing-footer {
 	position: absolute;
 	bottom: 0px;
 }
 
-#events .event-date {
-	font-style: italic;
+#events p:last-child {
+	margin: 0px;
 }
 
 .events-list {
@@ -143,49 +96,6 @@ a.ical {
 
 #archives ul:nth-of-type(3n + 1) {
 	clear: left;
-}
-
-.ui-datepicker-calendar {
-	margin: auto;
-	width: 100%;
-}
-
-.ui-datepicker-calendar th {
-	padding: 6px 12px;
-}
-
-.ui-datepicker-calendar td {
-	padding: 0px;
-}
-
-.ui-datepicker-header { position: relative; padding: 6px 0; }
-.ui-datepicker-prev, 
-.ui-datepicker-next { 
-	position: absolute; 
-	text-decoration: underline; 
-	cursor: pointer;
-}
-
-.ui-datepicker-prev { left: 0px; }
-.ui-datepicker-next { right: 0px; }
-.ui-datepicker-prev span, 
-.ui-datepicker-next span { }
-.ui-datepicker-title { text-align: center; }
-
-.ui-datepicker td span, 
-.ui-datepicker td a { 
-	display: block; 
-	text-align: right; 
-	text-decoration: none; 
-	padding: 6px 12px;
-}
-
-.ui-datepicker td span {
-	font-size: small;
-}
-
-.ui-datepicker td a {
-	font-weight: bold;
 }
 
 #refinery-calendar-holder {
@@ -230,17 +140,16 @@ a.ical {
     max-width: 90px;
 }
 
+#event .button {
+	display: inline-block;
+	padding: 5px 10px 6px;
+}
 
 #event #prevnext_nav {
     clear: both;
     display: block;
     margin-bottom: 2em;
     text-align: center;
-}
-
-#event .button {
-	display: inline-block;
-	padding: 5px 10px 6px;
 }
 
 #event #prevnext_nav .prev {
@@ -253,4 +162,47 @@ a.ical {
 
 #event #prevnext_nav .third {
     width: 40%;
+}
+
+.ui-datepicker-calendar {
+	margin: auto;
+	width: 100%;
+}
+
+.ui-datepicker-calendar th {
+	padding: 6px 12px;
+}
+
+.ui-datepicker-calendar td {
+	padding: 0px;
+}
+
+.ui-datepicker-header { position: relative; padding: 6px 0; }
+.ui-datepicker-prev, 
+.ui-datepicker-next { 
+	position: absolute; 
+	text-decoration: underline; 
+	cursor: pointer;
+}
+
+.ui-datepicker-prev { left: 0px; }
+.ui-datepicker-next { right: 0px; }
+.ui-datepicker-prev span, 
+.ui-datepicker-next span { }
+.ui-datepicker-title { text-align: center; }
+
+.ui-datepicker td span, 
+.ui-datepicker td a { 
+	display: block; 
+	text-align: right; 
+	text-decoration: none; 
+	padding: 6px 12px;
+}
+
+.ui-datepicker td span {
+	font-size: small;
+}
+
+.ui-datepicker td a {
+	font-weight: bold;
 }

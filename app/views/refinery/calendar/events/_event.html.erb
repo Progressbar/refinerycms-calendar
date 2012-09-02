@@ -4,13 +4,13 @@ individual ||= false
 archive ||= false
 category ||= false
 
-event_class = 'clearfix'
+event_class = 'thing clearfix'
 event_class += ' highlight' if event.featured?
 
 -%>
 
 <%= div_for event, :class => event_class do -%>
-  <div class="event-image" >
+  <div class="thing-image" >
   <%= link_to refinery.calendar_event_path(event) do -%>
     <% if event.image %>
       <%= image_fu event.image, "150x150#c" %>
@@ -19,20 +19,20 @@ event_class += ' highlight' if event.featured?
     <% end %>
   <% end %>
   </div>
-  <div class="event-detail">
-    <header class="header event-header">
+  <div class="thing-detail">
+    <header class="header thing-header">
       <%= link_to refinery.calendar_event_path(event, :format => :ics), :class => 'ical', :title => 'ICAL' do -%>
         <img src="/assets/icons/date_add.png" alt="ical">
       <% end %>
       <h3><%= link_to event.title, refinery.calendar_event_path(event) %></h3>
-      <div class="event-date">
+      <div class="thing-date">
         <%= smart_date_for(event) %>
       </div>
     </header>
-    <div class="event-description">
+    <div class="thing-description">
       <%= simple_format(truncate strip_tags(event.description), :length => ::Refinery::Calendar.events_desc_length) %>
     </div>
-    <footer class="footer event-footer">
+    <footer class="footer thing-footer">
       <%= render 'social', :event => event, :individual => false if ::Refinery::Calendar.social_buttons %>
     </footer>
   </div>

@@ -4,18 +4,18 @@
 <% content_for :body do %>
 
 <div id="place" class="thing place clearfix">
-  <div class="thing-content place-content">
-    <div class="thing-image place-image" >
+  <div class="thing-content">
+    <div class="thing-image" >
       <% if @place.image %>
         <%= image_fu @place.image, "150x150#c" %>
       <% else %>    
         <img src="/assets/default_place.png" width="150" height="150" />
       <% end %>
     </div>
-    <div class="thing-detail place-detail">
-      <header class="thing-header place-header">      
+    <div class="thing-detail">
+      <header class="thing-header">      
       </header>
-      <div class="thing-description place-description">
+      <div class="thing-description">
         <p>
           <%= sanitize(@place.description.to_s, 
                     :tags => ::Refinery::Calendar.html_allowed_tags, 
@@ -41,7 +41,7 @@
             </p>
         </address>
       </div>
-      <footer class="footer thing-footer place-footer">
+      <footer class="footer thing-footer">
         <% if @place.latitude.present? && @place.longitude.present? %>
         <span class="geo">
           GPS: 

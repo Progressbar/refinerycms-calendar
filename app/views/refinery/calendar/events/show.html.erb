@@ -3,46 +3,46 @@
 <% content_for :body do %>
 <%
 
-event_class = 'event'
+event_class = 'event thing'
 event_class += ' highlight' if @event.featured?
 
 -%>
 <div id="event" class="<%= event_class %>">
-  <div class="event-content clearfix" style="margin-bottom: 2em;">
-    <div class="event-image" >
+  <div class="thing-content clearfix" style="margin-bottom: 2em;">
+    <div class="thing-image" >
       <% if @event.image %>
         <%= image_fu @event.image, "150x150#c" %>
       <% else %>    
         <img src="/assets/default_event.png" width="150" height="150" />
       <% end %>
     </div>
-    <div class="event-detail">
-      <header class="event-header">
+    <div class="thing-detail">
+      <header class="thing-header">
         <%= link_to refinery.calendar_event_path(@event, :format => :ics), :class => 'ical', :title => 'ical export' do -%>
           <img src="/assets/icons/date_add.png" alt="ical">
         <% end %>
-        <h2 class="event-date">
+        <h2 class="thing-date">
           <%= smart_date_for(@event) %>
         </h2>
         <% if @event.place.present? %>
-        <h3 class="event-place">
+        <h3 class="thing-place">
           <%= link_to @event.place.title, refinery.calendar_place_path(@event.place) %></span>
         </h3>
       <% end -%>
       </header>
-      <div class="event-description">
+      <div class="thing-description">
         <%= sanitize(@event.description.to_s, 
                     :tags => ::Refinery::Calendar.html_allowed_tags, 
                     :attributes => ::Refinery::Calendar.html_allowed_tag_attributes) %>
       </div>
       <% if @event.categories.any? %>
-        <div class="event-categories">
+        <div class="thing-categories">
           <% @event.categories.each do |category| -%>
             <span class="category"><%= link_to category.name, refinery.calendar_category_path(category) %></span>&nbsp;
           <% end -%>
         </div>
       <% end %>
-      <footer class="footer event-footer">
+      <footer class="footer thing-footer">
         <%= render 'social', :event => @event, :individual => true if Refinery::Calendar.social_buttons %>
       </footer>
     </div>
