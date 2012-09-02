@@ -1,3 +1,9 @@
+if (typeof Date.prototype.getDayOfYear === 'undefined') {
+    Date.prototype.getDayOfYear = function() {
+        return Math.ceil((this - new Date(this.getFullYear(),0,1)) / 86400000);
+    }
+}
+
 var refinery = window.refinery || {};
 
 refinery.Calendar = function (config) {
