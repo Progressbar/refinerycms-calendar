@@ -2,6 +2,7 @@ module Refinery
   module Calendar
     module Admin
       class CategoriesController < CalendarController
+        include CalendarHelper
 
         crudify :'refinery/calendar/category',
           :order => 'title ASC'

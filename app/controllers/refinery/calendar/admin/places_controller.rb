@@ -2,6 +2,7 @@ module Refinery
   module Calendar
     module Admin
       class PlacesController < CalendarController
+        include CalendarHelper
 
         crudify :'refinery/calendar/place',
           :title_attribute => 'name',

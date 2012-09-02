@@ -2,6 +2,7 @@ module Refinery
   module Calendar
     module Admin
       class EventsController < CalendarController
+        include CalendarHelper
 
         crudify :'refinery/calendar/event',
           :xhr_paging => true,
