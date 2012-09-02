@@ -1,4 +1,4 @@
-var refinery = refinery || {};
+var refinery = window.refinery || {};
 
 refinery.Calendar = function (config) {
     var holder = $(config.holder);
@@ -122,7 +122,7 @@ refinery.Calendar = function (config) {
                                 that.initialized = true;
                                 that.setHolderState('initialized');
                                 that.initPicker();
-                                that.showDialog(that.current_date.toString('MM/dd/yyyy'));                     
+                                that.showDialog(that.current_date.toString('M/d/y'));                     
                             }
                         } catch (err) {
                             if (!!console) {

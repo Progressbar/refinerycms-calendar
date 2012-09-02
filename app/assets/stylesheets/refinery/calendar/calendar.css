@@ -69,7 +69,9 @@
 	margin-bottom: 10px;
 }
 
-.event-header h3 {
+.event-header h3, .event-header h2 {
+	padding-top: 0;
+	font-size: 115%;
 	margin-bottom: 4px;
 }
 
@@ -81,16 +83,12 @@
     text-overflow: ellipsis;
 }
 
-.event-date {
-	font-style: italic;
-}
-
 .event-footer {	
 	padding: 0;
 }
 
-.event-place, .event-categories {
-	margin-bottom: 1em;
+.event-categories {
+	margin-bottom: 2em;
 }
 
 a.ical {
@@ -105,6 +103,7 @@ a.ical {
 #event a.ical {
 	padding: 2px;
 }
+
 
 #events {
 	margin-bottom: 2em;
@@ -123,6 +122,10 @@ a.ical {
 #events .event-footer {
 	position: absolute;
 	bottom: 0px;
+}
+
+#events .event-date {
+	font-style: italic;
 }
 
 .events-list {
