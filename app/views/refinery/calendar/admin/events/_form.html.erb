@@ -1,4 +1,17 @@
 <h2>Calendar: Event</h2>
+<div class="flash flash flash_error">
+  <span>
+  Ospravedlňujeme sa, ale v module nahrávania obrázku sa momentálne nachádza chyba vďaka ktorej sa po nahratí obrázku zmažú všetky vyplnené údaje vo formulári. 
+  Preto odporúčame pripojiť obrázok k udalosti pred vyplnením ostatných položiek.<br>
+  Na oprave pracujeme.
+  </span>
+  <hr>
+  <p>
+    We apologize, because in image upload modul is bug which cause reset all form inputs after image upload.<br>
+    We recommend upload image and append it to event before fill any other inputs.<br>
+    We work on fix.
+  </p>
+</div>
 <%= form_for [refinery, :calendar_admin, @event] do |f| -%>
   <%= render '/refinery/admin/error_messages',
               :object => @event,
