@@ -12,11 +12,11 @@
         :target => "_blank" %>
 
     <%= link_to refinery_icon_tag("application_edit.png"), refinery.edit_calendar_admin_event_path(event),
-         :title => t('.edit') if user_can_modify_event(event) %>
+         :title => t('.edit') if user_can_modify_event?(event) %>
     <%= link_to(refinery_icon_tag("delete.png"), refinery.calendar_admin_event_path(event),
         :class => "cancel confirm-delete",
         :title => t('.delete'),
         :confirm => t('message', :scope => 'refinery.admin.delete', :title => event.title),
-        :method => :delete) if user_can_modify_event(event) %>
+        :method => :delete) if user_can_modify_event?(event) %>
   </span>
 </li>

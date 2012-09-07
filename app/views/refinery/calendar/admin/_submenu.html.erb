@@ -21,7 +21,7 @@
                   :class => "calendar_add_icon" %>
     </li>
   </ul>
-  <% if user_can_modify_categories %>
+  <% if user_can_modify_categories? %>
   <ul class='collapsible_menu'>
     <li class='not_a_link'>
       <%= link_to t('.categories.title'), '#',
@@ -37,7 +37,7 @@
     </li>
   </ul>
   <% end %>
-  <% if user_can_modify_places %>
+  <% if user_can_modify_places? %>
   <ul class='collapsible_menu'>
     <li class='not_a_link'>
       <%= link_to t('.places.title'), '#',
