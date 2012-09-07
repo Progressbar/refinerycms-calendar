@@ -18,14 +18,12 @@
 		<div class="g-plusone" data-size="<%= g_data_size %>" data-text="<%= msg %>"
 	 data-annotation="<%= g_data_annotation %>" data-href="<%= refinery.calendar_event_url(event) %>"></div>
 	</span>
-	
 	<span class="share-btn facebook">
 		<div id="fb-root"></div>
 		<% if individual %>
-		  <fb:like href="<%= refinery.calendar_event_url(event) %>" send="false" layout="box_count" width="60" height="64" show_faces="false" action="recommend" font="arial"></fb:like></span>
+		  <fb:like href="<%= refinery.calendar_event_url(event) %>" send="false" layout="box_count" width="60" height="64" show_faces="false" action="recommend" font="arial"></fb:like>
 		<% else %>
-		 <fb:like href="<%= refinery.calendar_event_url(event) %>" send="false" layout="button_count" width="60" height="32" show_faces="false" action="recommend" font="arial"></fb:like></span>
+		 <fb:like href="<%= refinery.calendar_event_url(event) %>" send="false" layout="button_count" width="60" height="32" show_faces="false" action="recommend" font="arial"></fb:like>
 		<% end %>
-
 	</span>
 </div>
