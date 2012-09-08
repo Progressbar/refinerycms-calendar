@@ -130,6 +130,23 @@ a.ical {
 	background-image: url(/assets/icons/date.png);
 }
 
+.ui-icon {
+	/* background-image: url("ui-icons_cccccc_256x240.png"); */
+    display: block;
+    overflow: hidden;
+    text-indent: -999em;
+    height: 16px;
+    width: 16px;
+}
+
+.ui-icon-circle-triangle-w {
+    background-position: -80px -192px;
+}
+
+.ui-icon-circle-triangle-e {
+    background-position: -48px -192px;
+}
+
 .share-btn {
     margin-right: 10px;
     display: inline-block;
