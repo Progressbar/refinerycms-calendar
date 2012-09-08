@@ -115,7 +115,7 @@ refinery.Calendar = function (config) {
                 type : 'GET',
                 error : function (response) {
                     if (!!console) {
-                        console.log(err);
+                        console.log(response);
                     }
 
                     that.setHolderState('error');
