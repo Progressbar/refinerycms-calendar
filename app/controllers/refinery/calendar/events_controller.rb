@@ -10,8 +10,6 @@ module Refinery
             :per_page => ::Refinery::Calendar.events_per_page
           })
 
-        @archive_events_dates = Event.live.select('start_date').for_archive_list
-
         # you can use meta fields from your model instead (e.g. browser_title)
         # by swapping @page for @event in the line below:
         present(@page)
@@ -56,6 +54,7 @@ module Refinery
 
       def get_events
         @events = Event.live
+        @archive_events_dates = Event.live.select('start_date').for_archive_list
       end
 
     end

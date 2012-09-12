@@ -1,2 +1,10 @@
 <%= will_paginate @events if Refinery::Calendar::Admin::EventsController.pageable? %>
-<%= render 'sortable_list' %>
+<div class="<%= ['clearfix', 'pagination_frame', pagination_css_class].compact.join(' ') %>">
+  <% group_by_date(@events).each do |container|
+       date = Date.parse((event_group = container.last).first.start_date.to_s) %>
+    <h3><%= l(date, :format => :long ) %></h3>
+    <ul>
+      <%= render :partial => 'event', :collection => event_group %>
+    </ul>
+  <% end %>
+</div>
