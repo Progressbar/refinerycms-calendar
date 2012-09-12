@@ -78,6 +78,13 @@ event_class += ' highlight' if @event.featured?
     </span>
   </nav><!--#event_nav-->  
 </div>
+
+<% if @archive_events_dates.any? %>
+  <section id="archives" class="clearfix" >
+    <h2><%= t('archives', :scope => 'refinery.calendar.events.index') %></h2>
+    <%= events_archive_list(@archive_events_dates) %>
+  </section>
+<% end %>
 <% end %>
 
 <%= render '/refinery/calendar/sidebar' %>
