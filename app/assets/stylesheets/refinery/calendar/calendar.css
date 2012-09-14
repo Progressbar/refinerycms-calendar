@@ -130,6 +130,10 @@ a.ical {
 	background-image: url(/assets/icons/date.png);
 }
 
+.calendar-gcal-icon {
+	background-image: url(/assets/icons/google-calendar.png);
+}
+
 .ui-icon {
 	/* background-image: url("ui-icons_cccccc_256x240.png"); */
     display: block;

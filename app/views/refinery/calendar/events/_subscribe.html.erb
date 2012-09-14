@@ -8,4 +8,8 @@
 		<a href="<%= refinery.calendar_root_url(:format => :ics) %>" class="calendar-icon calendar-ical-icon">
 			ICAL</a>
 	</p>
+	<p>
+		<a href="http://www.google.com/calendar/render?cid=<%= CGI.escape(refinery.calendar_root_url(:format => :ics)) %>" class="calendar-icon calendar-gcal-icon">
+			Google Calendar</a>
+	</p>
 </aside><!-- subscribe -->
