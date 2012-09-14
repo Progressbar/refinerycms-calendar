@@ -2,7 +2,6 @@ module Refinery
   module Calendar
     module Admin
       class PlacesController < CalendarController
-        include CalendarHelper
 
         crudify :'refinery/calendar/place',
           :title_attribute => 'name',
@@ -16,7 +15,7 @@ module Refinery
         private
 
         def check_acl
-          error_404 unless user_can_modify_categories
+          error_404 unless user_can_modify_places?
         end
       end
     end

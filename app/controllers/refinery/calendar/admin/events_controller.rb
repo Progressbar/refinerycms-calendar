@@ -1,8 +1,8 @@
 module Refinery
   module Calendar
     module Admin
-      class EventsController < CalendarController
-        include CalendarHelper
+      class EventsController < ::Refinery::Calendar::Admin::CalendarController
+        include ::Refinery::Calendar::Admin::CalendarHelper
 
         crudify :'refinery/calendar/event',
           :xhr_paging => true,
@@ -81,7 +81,7 @@ module Refinery
         end
 
         def check_acl
-          error_404 unless user_can_modify_event(@event)
+          error_404 unless user_can_modify_event?(@event)
         end
       end
     end
