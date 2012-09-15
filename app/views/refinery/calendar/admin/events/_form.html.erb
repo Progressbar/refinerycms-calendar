@@ -1,39 +1,26 @@
 <h2>Calendar: Event</h2>
-<div class="flash flash flash_error">
-  <span>
-  Ospravedlňujeme sa, ale v module nahrávania obrázku sa momentálne nachádza chyba vďaka ktorej sa po nahratí obrázku zmažú všetky vyplnené údaje vo formulári. 
-  Preto odporúčame pripojiť obrázok k udalosti pred vyplnením ostatných položiek.<br>
-  Na oprave pracujeme.
-  </span>
-  <hr>
-  <p>
-    We apologize, because in image upload modul is bug which cause reset all form inputs after image upload.<br>
-    We recommend upload image and append it to event before fill any other inputs.<br>
-    We work on fix.
-  </p>
-</div>
 <%= form_for [refinery, :calendar_admin, @event] do |f| -%>
   <%= render '/refinery/admin/error_messages',
               :object => @event,
               :include_object_name => true %>
 
-  <div class='field'>
+  <div class="field">
     <%= f.label :title -%>
     <%= f.text_field :title, :class => 'larger widest'  -%>
   </div>
 
-  <div class='field'>
-    <div id='page-tabs' class='clearfix ui-tabs ui-widget ui-widget-content ui-corner-all'>
-      <ul id='page_parts'>
+  <div class="field">
+    <div id="page-tabs" class="clearfix ui-tabs ui-widget ui-widget-content ui-corner-all">
+      <ul id="page_parts">
         <% [:description].each_with_index do |part, part_index| %>
-          <li class='ui-state-default<%= ' ui-state-active' if part_index == 0 %>'>
-            <%= link_to t("#{part}", :scope => "activerecord.attributes.refinery/calendar/event", :default => part.to_s.titleize), "##{part}" %>
+          <li class="ui-state-default<%= ' ui-state-active' if part_index == 0 %>">
+            <%= link_to t(part.to_s, :scope => 'activerecord.attributes.refinery/calendar/event', :default => part.to_s.titleize), "##{part}" %>
           </li>
         <% end %>
       </ul>
-      <div id='page_part_editors'>
+      <div id="page_part_editors">
         <% [:description].each do |part| %>
-          <div class='page_part' id='<%= part %>'>
+          <div class="page_part" id="<%= part %>">
             <%= f.text_area part, :rows => 20, :class => 'wymeditor widest' -%>
           </div>
 
@@ -44,10 +31,10 @@
 
   <%= render '/refinery/admin/form_advanced_options_menu', :f => f %>
 
-  <div id='more_options' style="display:none;">
+  <div id="more_options" style="display:none;">
     <div class="hemisquare">
 
-      <div class='field'>
+      <div class="field">
         <h3><%= t('title', :scope => 'refinery.calendar.admin.submenu.categories') %></h3>
         
         <% if @categories.any? %>
@@ -70,7 +57,7 @@
         <% end %>
       </div>
 
-      <div class='field'>
+      <div class="field">
         <h3><%= t('title', :scope => 'refinery.calendar.admin.submenu.places') %></h3>
         <% if @places.any? %>       
           <%= f.select :location_id, @places.map { |p| [p.title, p.id] } %>
@@ -81,7 +68,7 @@
         <% end %>
       </div>
 
-      <div class='field'>
+      <div class="field">
         <%= f.label :published_at -%>
         <%= f.datetime_select :published_at %>
       </div>
@@ -92,7 +79,7 @@
       </div>
 
     </div>
-    <div class='hemisquare right_side'>
+    <div class="hemisquare right_side">
 
       
     </div>
@@ -101,20 +88,20 @@
   <div class="clearfix">
     <div class="hemisquare">
 
-      <div class='field'>
+      <div class="field">
         <%= f.label :start_date -%>
         <%= f.datetime_select :start_date, :default => Time.now.tomorrow.change(:hour => 18, :minute => 0) %>
       </div>
 
-      <div class='field'>
+      <div class="field">
         <%= f.label :end_date -%>
         <%= f.datetime_select :end_date, :default => Time.now.tomorrow.change(:hour => 20, :minute => 0) %>
       </div>
 
     </div>
-    <div class='hemisquare right_side'>
+    <div class="hemisquare right_side">
 
-      <div class='field'>
+      <div class="field">
         <%= f.label :image -%>
         <%= render :partial => "/refinery/admin/image_picker", :locals => {
               :f => f,
