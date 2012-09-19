@@ -8,7 +8,7 @@ xml.rss :version => "2.0" do
     @events.each do |event|
       xml.item do
         xml.title event.title
-        xml.description simple_format(strip_tags event.description)
+        xml.description simple_format(strip_tags event.description.to_s)
 
         xml.start_date event.start_date.to_s(:rfc822)
         xml.end_date event.end_date.to_s(:rfc822)

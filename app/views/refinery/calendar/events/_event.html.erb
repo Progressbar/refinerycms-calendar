@@ -30,7 +30,7 @@ event_class += ' highlight' if event.featured?
       </div>
     </header>
     <div class="thing-description">
-      <%= simple_format(truncate strip_tags(event.description), :length => ::Refinery::Calendar.events_desc_length) %>
+      <%= simple_format(truncate strip_tags(event.description.to_s), :length => ::Refinery::Calendar.events_desc_length) %>
     </div>
     <footer class="footer thing-footer">
       <%= render 'social', :event => event, :individual => false if ::Refinery::Calendar.social_buttons %>
