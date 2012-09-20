@@ -20,6 +20,12 @@ module Refinery
         # todo before filter check acl
         before_filter :check_acl, :only => [:edit, :update, :destroy]
 
+        def new
+          @event = Refinery::Calendar::Event.new
+          @event.dates.new(:date_time => Time.now.tomorrow.change(:hour => 18, :minute => 0))
+          @event.dates.new(:date_time => Time.now.tomorrow.change(:hour => 20, :minute => 0))
+        end
+
         def create
           @event = Refinery::Calendar::Event.new(params[:event])
           @event[:user_id] = current_refinery_user.id

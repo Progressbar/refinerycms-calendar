@@ -13,19 +13,30 @@ module Refinery
       
       has_many :categorizations, :class_name => 'Refinery::Calendar::Categorization', :dependent => :destroy, :foreign_key => :calendar_event_id
       has_many :categories, :through => :categorizations, :source => :calendar_category
+      
+      has_many :dates, :class_name => 'Refinery::Calendar::Date', :dependent => :destroy
+
+      accepts_nested_attributes_for :dates
 
       validates :title, :presence => true
       validates :published_at, :presence => true
-      validates :start_date, :end_date, :presence => true
       validate :ends_after_start
 
       alias_attribute :title, :name
 
-      attr_accessible :title, :description, :start_date, :end_date,
-                      :draft, :published_at, :featured, :position,
+      attr_accessible :title, :description,
+                      :draft, :published_at, :featured,
                       :image_id, :category_ids, :location_id, :user_id
 
       acts_as_indexed :fields => [:title, :description]
+
+      def start_date
+        self.dates.first.day
+      end
+
+      def end_date
+        self.dates.last.day 
+      end
 
       def current?
         end_date >= Time.now
@@ -92,13 +103,12 @@ module Refinery
         end
 
       end
-
+ 
       private
 
       def ends_after_start
         errors.add(:base, "End at date must be after the start at date") if end_date < start_date
       end
-
     end
   end
 end

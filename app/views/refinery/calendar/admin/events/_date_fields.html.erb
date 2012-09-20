@@ -1,0 +1,21 @@
+<span class="event-date <%= start_date ? 'start-date' : 'end-date' %>">
+  <span class="date">
+    <%= f.label :date_time, (start_date ? 'From: ' : 'To: '), :class => 'stripped' %>
+    <%= f.date_select :date_time %>
+    <% if show_switch_link %>
+      <%= link_to_function 'Switch to time', 'refinery.calendar.switchDurationToTime(this)', :class => 'switch-link' %>
+    <% end %>
+    <% if show_destroy_link %>
+      <%= f.hidden_field :_destroy %>
+      <%= link_to_function 'remove', 'remove_fields(this)' %>
+    <% end %>
+  </span>
+  <span class="time">
+  <%= f.label :date_time, (start_date ? 'From: ' : 'To: '), :class => 'stripped' %>
+  <%= f.time_select :date_time %>
+  <% if show_switch_link %>
+    <%= link_to_function 'Switch to date', 'refinery.calendar.switchDurationToDays(this)', :class => 'switch-link' %>
+  <% end %>
+  </span>
+  
+</span>
