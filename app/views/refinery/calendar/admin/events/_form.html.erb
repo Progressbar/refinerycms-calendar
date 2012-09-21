@@ -8,7 +8,6 @@
     <%= f.label :title -%>
     <%= f.text_field :title, :class => 'larger widest'  -%>
   </div>
-
   <div class="field">
     <div id="page-tabs" class="clearfix ui-tabs ui-widget ui-widget-content ui-corner-all">
       <ul id="page_parts">
@@ -41,12 +40,12 @@
         <ul class="categories" style="padding-left: 0px; list-style: none;margin-left: 0px;">
           <% @categories.each do |category| %>
           <li>
-             <%= check_box_tag 'event[category_ids][]', category.id,
-                               @event.categories.include?(category),
-                               :id => (id="event_category_ids_#{category.id}") %>
-             <%= label_tag 'event[category_ids][]', category.title,
-                           :class => 'stripped',
-                           :for => id %>
+            <%= check_box_tag 'event[category_ids][]', category.id,
+                              @event.categories.include?(category),
+                              :id => (id="event_category_ids_#{category.id}") %>
+            <%= label_tag 'event[category_ids][]', category.title,
+                          :class => 'stripped',
+                          :for => id %>
           </li>
           <% end %>
         </ul>
@@ -77,30 +76,23 @@
         <%= f.check_box :featured %>
         <%= f.label :featured, :class => 'stripped' %>
       </div>
-
-    </div>
-    <div class="hemisquare right_side">
-
-      
     </div>
   </div>
-
   <div class="clearfix">
-    <div class="hemisquare">
-
-      <div class="field">
-        <%= f.label :start_date -%>
-        <%= f.datetime_select :start_date, :default => Time.now.tomorrow.change(:hour => 18, :minute => 0) %>
-      </div>
-
-      <div class="field">
-        <%= f.label :end_date -%>
-        <%= f.datetime_select :end_date, :default => Time.now.tomorrow.change(:hour => 20, :minute => 0) %>
-      </div>
-
+    <div class="hemisquare duration-<%= @event.duration_unit %>">
+      <%= f.label :date -%>
+      <% i = 1 %>
+      <%= f.fields_for :dates do |builder| %>
+        <%= raw '<div class="start-end-date-holder">' if (i % 2 == 1) %>
+        <%= render 'date_fields', :f => builder, :start_date => (i % 2 == 1), :show_switch_link => (i % 2 == 0), :show_destroy_link => false %>
+        <%= raw '</div>' if (i % 2 == 0) %>
+        <% i += 1 %>
+      <% end %>
+      <p class="add-date-link">
+        <%= link_to_add_date 'Add day', f, :dates %>
+      </p>
     </div>
     <div class="hemisquare right_side">
-
       <div class="field">
         <%= f.label :image -%>
         <%= render :partial => "/refinery/admin/image_picker", :locals => {
@@ -110,28 +102,151 @@
               :toggle_image_display => false
             } %>
       </div>
-
     </div>
   </div>
+
   <%= render '/refinery/admin/form_actions', :f => f,
              :continue_editing => false,
              :delete_title => t('delete', :scope => 'refinery.events.admin.events.event'),
              :delete_confirmation => t('message', :scope => 'refinery.admin.delete', :title => @event.title) %>
 <% end -%>
 <% content_for :stylesheets do %>
-  <%= stylesheet_link_tag 'chosen' %>
+<style type="text/css">
+
+.event-date label {
+  display: inline-block;
+  min-width: 3em;
+}
+
+.end-date .time label {
+  min-width: 1em;
+  padding-left: 3px;
+}
+
+.duration-hours .time {
+  display: inline;
+}
+
+.duration-hours .date label {
+  visibility: hidden;
+}
+
+.duration-hours .switch-to-time,
+.duration-days .switch-to-days {
+  display: none;
+}
+
+.duration-hours .end-date .date {
+  display: none;
+}
+
+.duration-days .time label {
+  display: none;
+}
+
+.duration-hours span.date {
+  display: block;
+}
+
+.duration-days .date {
+  margin-right: 1.5em;
+}
+
+.duration-days .add-date-link {
+  display: none;
+}
+
+.duration-days .event-date {
+  display: block;
+}
+
+</style>
+
 <% end %>
 
 <% content_for :javascripts do %>
-  <%= javascript_include_tag 'chosen.jquery.min' %>
   <script>
-    $(document).ready(function(){
+
+    if (typeof window.refinery == 'undefined') {
+      window.refinery = {};
+    }
+
+    (function (window) {
+      'use strict';
+
+      var calendar = {};
+
+      calendar.admin = {
+
+        switchDurationToTime : function () {
+          $('.duration-days').removeClass('duration-days').addClass('duration-hours');
+          refinery.calendar.admin.fixDateSelectsOnTime();
+        },
+
+        switchDurationToDays : function () {
+          $('.duration-hours').removeClass('duration-hours').addClass('duration-days');
+          $('.duration-days').find('input[type=hidden]').val(1);
+          $('.duration-days').find('.start-end-date-holder').each(function (i) {
+            if (i > 0) {
+              $(this).hide();
+            }
+          });
+        },
+
+        fixDateSelectsOnTime : function () {
+          var dates = $('.start-end-date-holder');
+          var v = null;
+          var select_inputs = null;
+          dates.each(function () {
+            select_inputs = $(this).find('select');
+
+            for (var i = 0; i < 3; i++) {
+              v = $(select_inputs[i]).find('option:selected').val();
+              $(select_inputs[i + 5]).find('option').each(function (j) {
+                var elm = $(this);
+                if (elm.val() == v) {
+                  elm.attr('selected', true);
+                } else {
+                  elm.attr('selected', false);
+                }
+              });
+            }
+          });
+        },
+
+        removeFields : function (link) {
+          var elm = $(link);
+          var holder = elm.closest('.start-end-date-holder');
+          holder.find('input[type=hidden]').val(1);
+          holder.hide();
+        },
+
+        addFields : function (link, association, content) {
+          var new_id = new Date().getTime();
+          var regexp = new RegExp('new_' + association, 'g');
+          $(link).parent().before(content.replace(regexp, new_id));
+        },
+
+        // time helper add date inputs to time select as hidden fields 
+        sanitizeForm : function () {
+          $('.time input[type=hidden]').remove();
+        }
+
+      };
+
+      window.refinery.calendar = calendar;
+
+    }(window));
+
+    $(document).ready(function() {
+
+      $('form').submit(function () {
+        refinery.calendar.admin.sanitizeForm();
+        refinery.calendar.admin.fixDateSelectsOnTime();
+      });
+
       page_options.init(false, '', '');
 
-      $('#event_place_id').chosen({
-        no_results_text: "No results matched",
-        allow_single_deselect: true
-      });
     });
   </script>
 <% end %>

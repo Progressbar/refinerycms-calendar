@@ -6,7 +6,10 @@ en:
     calendar:
       strftime: '%A, %e %B, %H:%M'
       strftime_long: '%A, %e %B %Y %H:%M'
-      start_date_smart_strftime: '%A, %e %B &ndash; %H:%M'
+      strftime_short: '%A, %e %B %Y'
+      start_date_strftime: '%A, %e %B'
+      end_date_strftime: '%A, %e %B %Y'
+      start_date_smart_strftime: '%A, %e %B %Y &ndash; %H:%M'
       end_date_smart_strftime: '%H:%M'
       to: 'to'
       until: 'until'
