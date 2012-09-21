@@ -8,7 +8,6 @@
     <%= f.label :title -%>
     <%= f.text_field :title, :class => 'larger widest'  -%>
   </div>
-<!--
   <div class="field">
     <div id="page-tabs" class="clearfix ui-tabs ui-widget ui-widget-content ui-corner-all">
       <ul id="page_parts">
@@ -28,7 +27,7 @@
       </div>
     </div>
   </div>
--->
+
   <%= render '/refinery/admin/form_advanced_options_menu', :f => f %>
 
   <div id="more_options" style="display:none;">
@@ -79,9 +78,11 @@
       </div>
     </div>
   </div>
+    
 
   <div class="clearfix">
-    <div class="hemisquare duration-hours">
+    <% duration = (@event.dates.first.date_time.strftime('%j') == @event.dates.second.date_time.strftime('%j') ? 'hours' : 'days') %>
+    <div class="hemisquare duration-<%= duration %>">
       <%= f.label :date -%>
       <% i = 1 %>
       <%= f.fields_for :dates do |builder| %>
@@ -92,43 +93,6 @@
         <%= link_to_add_date 'Add day', f, :dates %>
       </p>
     </div>
-<style>
-
-  .event-date label {
-    display: inline-block;
-    min-width: 4em;
-  }
-
-  .duration-hours .time {
-    display: block;
-  }
-
-  .duration-hours .date label {
-    visibility: hidden;
-  }
-
-  .duration-hours .date .switch-link {
-    display: none;
-  }
-
-  .duration-hours .end-date .date {
-    display: none;
-  }
-
-  .duration-days .time {
-    display: none;
-  }
- 
-  .duration-days .date {
-    display: block;
-  }
-
-  .duration-days .add-date-link {
-    display: none;
-  }
-
-  .start-end-date-holder {  }
-</style>
     <div class="hemisquare right_side">
       <div class="field">
         <%= f.label :image -%>
@@ -148,50 +112,133 @@
              :delete_confirmation => t('message', :scope => 'refinery.admin.delete', :title => @event.title) %>
 <% end -%>
 <% content_for :stylesheets do %>
-  <%= stylesheet_link_tag 'chosen' %>
+<style type="text/css">
+
+.event-date label {
+  display: inline-block;
+  min-width: 3em;
+}
+
+.end-date .time label {
+  min-width: 1em;
+  padding-left: 3px;
+}
+
+.duration-hours .time {
+  display: inline;
+}
+
+.duration-hours .date label {
+  visibility: hidden;
+}
+
+.duration-hours .switch-to-time,
+.duration-days .switch-to-days {
+  display: none;
+}
+
+.duration-hours .end-date .date {
+  display: none;
+}
+
+.duration-days .time label {
+  display: none;
+}
+
+.duration-hours span.date {
+  display: block;
+}
+
+.duration-days .date {
+  margin-right: 1.5em;
+}
+
+.duration-days .add-date-link {
+  display: none;
+}
+
+.duration-days .event-date {
+  display: block;
+}
+
+</style>
+
 <% end %>
 
 <% content_for :javascripts do %>
-  <%= javascript_include_tag 'chosen.jquery.min' %>
   <script>
 
     if (typeof window.refinery == 'undefined') {
-      window.refinery = {}
+      window.refinery = {};
     }
 
-    refinery.calendar = refinery.calendar || {};
+    (function (window) {
+      'use strict';
 
-    function add_fields(link, association, content) {
-      var new_id = new Date().getTime();
-      var regexp = new RegExp('new_' + association, 'g');
-      $(link).parent().before(content.replace(regexp, new_id));
-    }
+      var calendar = {};
 
-    function remove_fields (link) {
-      var elm = $(link);
-      var holder = elm.closest('.start-end-date-holder');
-      holder.find('input[type=hidden]').val(1);
-      holder.hide();
-    }
+      calendar.admin = {
 
-    refinery.calendar.switchDurationToDays = function () {
-      $('.duration-hours').removeClass('duration-hours').addClass('duration-days');
-      $('.duration-days').find('input[type=hidden]').val(1);
-      $('.duration-days').find('.start-end-date-holder').hide();
-    }
+        switchDurationToTime : function () {
+          $('.duration-days').removeClass('duration-days').addClass('duration-hours');
+          refinery.calendar.admin.fixDateSelectsOnTime();
+        },
 
-    refinery.calendar.switchDurationToTime = function () {
-      $('.duration-days').removeClass('duration-days').addClass('duration-hours');
-    }
+        switchDurationToDays : function () {
+          $('.duration-hours').removeClass('duration-hours').addClass('duration-days');
+          $('.duration-days').find('input[type=hidden]').val(1);
+          $('.duration-days').find('.start-end-date-holder').hide();
+        },
+
+        fixDateSelectsOnTime : function () {
+          var select_inputs = $('.duration-hours select');
+          var l = 3;
+          var v = null;
+          for (var i = 0; i < l; i++) {
+            v = $(select_inputs[i]).find('option:selected').val();
+            $(select_inputs[i + 5]).find('option').each(function (j) {
+              var elm = $(this);
+              if (elm.val() == v) {
+                elm.attr('selected', true);
+              } else {
+                elm.attr('selected', false);
+              }
+            });
+          }
+        },
+
+        removeFields : function (link) {
+          var elm = $(link);
+          var holder = elm.closest('.start-end-date-holder');
+          holder.find('input[type=hidden]').val(1);
+          holder.hide();
+        },
+
+        addFields : function (link, association, content) {
+          var new_id = new Date().getTime();
+          var regexp = new RegExp('new_' + association, 'g');
+          $(link).parent().before(content.replace(regexp, new_id));
+        },
+
+        // time helper add date inputs to time select as hidden fields 
+        sanitizeForm : function () {
+          $('.time input[type=hidden]').remove();
+        }
+
+      };
+
+      window.refinery.calendar = calendar;
+
+    }(window));
 
     $(document).ready(function() {
 
+      $('form').submit(function () {
+        refinery.calendar.admin.sanitizeForm();
+      });
+
       page_options.init(false, '', '');
 
-      $('#event_place_id').chosen({
-        no_results_text: "No results matched",
-        allow_single_deselect: true
-      });
     });
   </script>
 <% end %>

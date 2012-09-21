@@ -24,8 +24,6 @@ module Refinery
               ::Refinery::Calendar.refinery_user_can_manage_places))
       	end
 
-
-
         def link_to_add_date(name, f, association)
           new_start_object = @event.dates.new(:date_time => Time.now.tomorrow.change(:hour => 18, :minute => 0))
           new_end_object = @event.dates.new(:date_time => Time.now.tomorrow.change(:hour => 20, :minute => 0))
@@ -45,7 +43,7 @@ module Refinery
               :show_destroy_link => true)
           end
           fields += '</div>'
-          link_to_function(name, %Q{add_fields(this, "#{association}", "#{escape_javascript(fields)}")}.html_safe)
+          link_to_function(name, %Q{refinery.calendar.admin.addFields(this, "#{association}", "#{escape_javascript(fields)}")}.html_safe)
         end
 
 

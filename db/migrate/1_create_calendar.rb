@@ -6,8 +6,8 @@ class CreateCalendar < ActiveRecord::Migration
       # default fields
       t.string :name,             :null => false
       t.text :description
-      t.datetime :start_date
-      t.datetime :end_date
+      t.datetime :start_date,     :null => false
+      t.datetime :end_date,       :null => false
 
       # extra fields
       t.string :slug,             :null => false
@@ -75,9 +75,9 @@ class CreateCalendar < ActiveRecord::Migration
     add_index Refinery::Calendar::Place.table_name, :name
     add_index Refinery::Calendar::Place.table_name, :slug, :unique => true
 
-    create_table Refinery::Calendar::EventDate.table_name, :id => true do |t|
-      t.integer :calendar_event_id, :null => false
-      t.datetime :date_time
+    create_table Refinery::Calendar::Date.table_name, :id => true do |t|
+      t.integer :event_id, :null => false
+      t.datetime :date_time, :null => false
     end
 
   end

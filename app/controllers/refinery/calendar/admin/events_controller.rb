@@ -20,6 +20,8 @@ module Refinery
         # todo before filter check acl
         before_filter :check_acl, :only => [:edit, :update, :destroy]
 
+        before_filter :set_dates, :only => [:edit]
+
         def new
           @event = Refinery::Calendar::Event.new
           @event.dates.new(:date_time => Time.now.tomorrow.change(:hour => 18, :minute => 0))
@@ -88,6 +90,14 @@ module Refinery
 
         def check_acl
           error_404 unless user_can_modify_event?(@event)
+        end
+
+        # for backward compatibility
+        def set_dates
+          if @event.dates.empty?
+            @event.dates.new(:date_time => @event.start_date)
+            @event.dates.new(:date_time => @event.end_date)
+          end
         end
       end
     end

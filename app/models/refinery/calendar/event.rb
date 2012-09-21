@@ -26,17 +26,14 @@ module Refinery
 
       attr_accessible :title, :description,
                       :draft, :published_at, :featured,
-                      :image_id, :category_ids, :location_id, :user_id
+                      :image_id, :category_ids, :location_id, :user_id, :dates_attributes
 
       acts_as_indexed :fields => [:title, :description]
 
-      def start_date
-        self.dates.first.day
-      end
 
-      def end_date
-        self.dates.last.day 
-      end
+      before_save :update_start_end_date
+      before_update :update_start_end_date
+
 
       def current?
         end_date >= Time.now
@@ -107,7 +104,12 @@ module Refinery
       private
 
       def ends_after_start
-        errors.add(:base, "End at date must be after the start at date") if end_date < start_date
+        errors.add(:base, "End at date must be after the start at date") if self.dates.last.date_time < self.dates.first.date_time
+      end
+
+      def update_start_end_date
+        self[:start_date] = self.dates.first.date_time
+        self[:end_date] = self.dates.last.date_time
       end
     end
   end
