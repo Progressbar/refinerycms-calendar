@@ -84,11 +84,11 @@ module Refinery
         alias_method :live, :published_before
 
         def archive
-          with_exclusive_scope { order('start_date DESC').where 'end_date < ?', Time.now }
+          with_exclusive_scope { order('start_date DESC').live.where 'end_date < ?', Time.now }
         end
         
         def by_archive archive_date
-          with_exclusive_scope { order('start_date DESC').where 'start_date between ? and ?', archive_date.beginning_of_month, archive_date.end_of_month }
+          with_exclusive_scope { order('start_date DESC').live.where 'start_date between ? and ?', archive_date.beginning_of_month, archive_date.end_of_month }
         end
         
         def by_year archive_date

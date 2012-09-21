@@ -27,8 +27,8 @@ module Refinery
         if request.xhr?
           date = "#{params[:month]}/#{params[:year]}"
           @archive_date = Time.parse(date)
-          @events = @events.by_archive(@archive_date).all
-          render :json => @events
+          @events = @events.by_archive(@archive_date)
+          render :json => @events.all
         else
           if params[:month].present?
             date = "#{params[:month]}/#{params[:year]}"
