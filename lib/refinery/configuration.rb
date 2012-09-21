@@ -18,6 +18,14 @@ module Refinery
     # evils
     config_accessor :social_buttons
 
+    # extra subscribe options
+    config_accessor :facebook_link
+    config_accessor :twitter_link
+    config_accessor :mailinglist_link
+    
+    # styling
+    config_accessor :theme
+
     self.categories = true
     self.places = true
     self.facebook_events = false
@@ -36,5 +44,12 @@ module Refinery
     self.refinery_user_can_manage_places = false
 
     self.social_buttons = true
+
+    self.facebook_link = 'https://twitter.com/progressbarsk'
+    self.twitter_link = 'https://www.facebook.com/progressbar'
+    self.mailinglist_link = '#mailing-list'
+
+
+    self.theme = 'default'
   end
 end

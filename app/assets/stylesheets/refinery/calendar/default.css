@@ -134,6 +134,18 @@ a.ical {
 	background-image: url(/assets/icons/google-calendar.png);
 }
 
+.calendar-facebook-icon {
+	background-image: url(/assets/icons/facebook_16.png);
+}
+
+.calendar-twitter-icon {
+	background-image: url(/assets/icons/twitter-bird-light-bgs_16.png);
+}
+
+.calendar-mailinglist-icon {
+	background-image: url(/assets/icons/email.png);
+}
+
 .ui-icon {
 	/* background-image: url("ui-icons_cccccc_256x240.png"); */
     display: block;

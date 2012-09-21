@@ -12,4 +12,22 @@
 		<a href="http://www.google.com/calendar/render?cid=<%= CGI.escape(refinery.calendar_root_url(:format => :ics)) %>" class="calendar-icon calendar-gcal-icon">
 			Google Calendar</a>
 	</p>
+	<% unless Refinery::Calendar.facebook_link.empty? %>
+	<p>
+		<a href="<%= Refinery::Calendar.facebook_link %>" class="calendar-icon calendar-facebook-icon">
+			Facebook</a>
+	</p>
+	<% end %>
+	<% unless Refinery::Calendar.twitter_link.empty? %>
+	<p>
+		<a href="<%= Refinery::Calendar.twitter_link %>" class="calendar-icon calendar-twitter-icon">
+			Twitter</a>
+	</p>
+	<% end %>	
+	<% unless Refinery::Calendar.mailinglist_link.empty? %>
+	<p>
+		<a href="<%= Refinery::Calendar.mailinglist_link %>" class="calendar-icon calendar-mailinglist-icon">
+			Mailing list</a>
+	</p>
+	<% end %>
 </aside><!-- subscribe -->
