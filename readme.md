@@ -16,3 +16,7 @@ rake db:migrate db:seed db:test:prepare
 ```
 
 Restart the server
+
+# study
+
+rfc5545
