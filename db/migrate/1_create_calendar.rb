@@ -95,6 +95,7 @@ class CreateCalendar < ActiveRecord::Migration
     drop_table Refinery::Calendar::Category.table_name
     drop_table Refinery::Calendar::Categorization.table_name
     drop_table Refinery::Calendar::Place.table_name
+    drop_table Refinery::Calendar::Date.table_name
 
   end
 

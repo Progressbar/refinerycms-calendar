@@ -20,6 +20,7 @@ module Refinery
 
       validates :title, :presence => true
       validates :published_at, :presence => true
+      validate :dates_presence
       validate :ends_after_start
 
       alias_attribute :title, :name
@@ -61,6 +62,18 @@ module Refinery
       
       def prev
         Event.published_before.where(['start_date < ?', start_date]).reverse.first
+      end
+
+      def duration_unit
+        if dates.any? and dates.first.date_time.strftime('%j') != dates.second.date_time.strftime('%j')
+          return :days
+        end
+
+        return :hours
+      end
+
+      def duration_in?(unit)
+        unit.to_sym == duration_unit
       end
 
       class << self
@@ -105,6 +118,10 @@ module Refinery
 
       def ends_after_start
         errors.add(:base, "End at date must be after the start at date") if self.dates.last.date_time < self.dates.first.date_time
+      end
+
+      def dates_presence
+        errors.add(:base, "Date must be filled") if self.dates.empty?
       end
 
       def update_start_end_date

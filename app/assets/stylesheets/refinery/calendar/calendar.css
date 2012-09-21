@@ -39,6 +39,8 @@
 
 .thing-detail {
 	margin-left: 165px;
+    min-height: 120px;
+    padding-bottom: 30px;
 }
 
 .thing-header {
@@ -68,8 +70,6 @@ a.ical {
 
 #events .thing-description {
 	margin-right: 10px;
-	max-height: 3em;
-	overflow: hidden;
 }
 
 #events .thing-footer {

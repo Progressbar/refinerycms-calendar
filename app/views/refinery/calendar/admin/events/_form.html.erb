@@ -78,15 +78,14 @@
       </div>
     </div>
   </div>
-    
-
   <div class="clearfix">
-    <% duration = (@event.dates.first.date_time.strftime('%j') == @event.dates.second.date_time.strftime('%j') ? 'hours' : 'days') %>
-    <div class="hemisquare duration-<%= duration %>">
+    <div class="hemisquare duration-<%= @event.duration_unit %>">
       <%= f.label :date -%>
       <% i = 1 %>
       <%= f.fields_for :dates do |builder| %>
+        <%= raw '<div class="start-end-date-holder">' if (i % 2 == 1) %>
         <%= render 'date_fields', :f => builder, :start_date => (i % 2 == 1), :show_switch_link => (i % 2 == 0), :show_destroy_link => false %>
+        <%= raw '</div>' if (i % 2 == 0) %>
         <% i += 1 %>
       <% end %>
       <p class="add-date-link">
@@ -187,24 +186,32 @@
         switchDurationToDays : function () {
           $('.duration-hours').removeClass('duration-hours').addClass('duration-days');
           $('.duration-days').find('input[type=hidden]').val(1);
-          $('.duration-days').find('.start-end-date-holder').hide();
+          $('.duration-days').find('.start-end-date-holder').each(function (i) {
+            if (i > 0) {
+              $(this).hide();
+            }
+          });
         },
 
         fixDateSelectsOnTime : function () {
-          var select_inputs = $('.duration-hours select');
-          var l = 3;
+          var dates = $('.start-end-date-holder');
           var v = null;
-          for (var i = 0; i < l; i++) {
-            v = $(select_inputs[i]).find('option:selected').val();
-            $(select_inputs[i + 5]).find('option').each(function (j) {
-              var elm = $(this);
-              if (elm.val() == v) {
-                elm.attr('selected', true);
-              } else {
-                elm.attr('selected', false);
-              }
-            });
-          }
+          var select_inputs = null;
+          dates.each(function () {
+            select_inputs = $(this).find('select');
+
+            for (var i = 0; i < 3; i++) {
+              v = $(select_inputs[i]).find('option:selected').val();
+              $(select_inputs[i + 5]).find('option').each(function (j) {
+                var elm = $(this);
+                if (elm.val() == v) {
+                  elm.attr('selected', true);
+                } else {
+                  elm.attr('selected', false);
+                }
+              });
+            }
+          });
         },
 
         removeFields : function (link) {
@@ -235,6 +242,7 @@
 
       $('form').submit(function () {
         refinery.calendar.admin.sanitizeForm();
+        refinery.calendar.admin.fixDateSelectsOnTime();
       });
 
       page_options.init(false, '', '');

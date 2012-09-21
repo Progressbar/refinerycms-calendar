@@ -6,8 +6,10 @@ FactoryGirl.define do
     published_at Time.now
     user_id { Factory(:refinery_user) }
     # start tomorrow on 18:00 until 22:00
-    start_date Time.now.tomorrow.beginning_of_day + (60 * 60 * 18)
-    end_date Time.now.tomorrow.beginning_of_day + (60 * 60 * 22)
+    dates [
+      Refinery::Calendar::Date.new(:date_time => Time.now.tomorrow.change(:hour => 18, :minute => 0)), 
+      Refinery::Calendar::Date.new(:date_time => Time.now.tomorrow.change(:hour => 20, :minute => 0)), 
+    ]
     
     factory :event_draft do
       draft true
