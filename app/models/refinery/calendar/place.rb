@@ -19,6 +19,7 @@ module Refinery
         title = self.name
         title += ", #{self.street_address}" if self.street_address.present?
         title += ", #{self.address_locality}" if self.address_locality.present?
+        title += ", #{self.address_country}" if self.address_country.present?
         title
       end
 

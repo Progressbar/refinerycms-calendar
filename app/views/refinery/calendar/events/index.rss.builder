@@ -9,6 +9,7 @@ xml.rss :version => "2.0" do
       xml.item do
         xml.title event.title
         xml.description simple_format(strip_tags event.description.to_s)
+        xml.place event.place.title
 
         xml.start_date event.start_date.to_s(:rfc822)
         xml.end_date event.end_date.to_s(:rfc822)
