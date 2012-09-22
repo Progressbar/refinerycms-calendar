@@ -1,4 +1,4 @@
-<% content_for :title, @event.title %>
+<% content_for :title, "#{@event.title} - #{@event.start_date.strftime('%A, %e %B %Y')}"  %>
 <% content_for :body_content_title, @event.title %>
 <% content_for :body do %>
 <%
@@ -26,7 +26,7 @@ event_class += ' highlight' if @event.featured?
         </h2>
         <% if @event.place.present? %>
         <h3 class="thing-place">
-          <%= link_to @event.place.title, refinery.calendar_place_path(@event.place) %></span>
+          <%= link_to @event.place.title, refinery.calendar_place_path(@event.place) %>
         </h3>
       <% end -%>
       </header>

@@ -75,6 +75,8 @@ a.ical {
 #events .thing-footer {
 	position: absolute;
 	bottom: 0px;
+	left: 0px;
+	width: 100%;
 }
 
 #events p:last-child {
@@ -87,6 +89,14 @@ a.ical {
 
 .events-list .event:last-child {
 	margin-bottom: 0px;
+}
+
+#events .event-social {
+	margin-left: 165px; float: left;
+}
+
+#events .location {
+	float: right;
 }
 
 #archives ul {
