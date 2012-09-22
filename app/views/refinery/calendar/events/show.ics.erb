@@ -21,8 +21,8 @@ END:VTIMEZONE
 BEGIN:VEVENT
 UID:<%= @event.id %>@<%= request.host %>
 SUMMARY:<%= @event.title %>
-DESCRIPTION:<%= truncate(strip_tags(@event.description.to_s.gsub(/\n/," ").gsub(/\r/," ")), :length => 200).gsub(',', '\,') %>
-LOCATION:<%= @event.place.title.gsub(',', '\,') %>
+DESCRIPTION:<%= truncate(strip_tags(@event.description.gsub(/\n/," ").gsub(/\r/," ")), :length => 200).gsub(',', '\,') if @event.description.present? %>
+LOCATION:<%= @event.place.title.gsub(',', '\,') if @event.place.present? %>
 URL:<%= refinery.calendar_event_url(@event) %>
 STATUS:CONFIRMED
 CLASS:PUBLIC
