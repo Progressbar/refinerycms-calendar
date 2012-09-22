@@ -4,7 +4,8 @@
 <script type="text/javascript">
 
 	var cfg = {
-		holder : $('#refinery-calendar-holder')
+		holder : $('#refinery-calendar-holder'),
+		first_day : <%= Refinery::Calendar.first_day %>
 	};
 
     var AppCalendar = refinery.Calendar(cfg);

@@ -25,6 +25,7 @@ module Refinery
     
     # styling
     config_accessor :theme
+    config_accessor :first_day
 
     self.categories = true
     self.places = true
@@ -41,7 +42,7 @@ module Refinery
     
     self.refinery_user_can_manage_events = false
     self.refinery_user_can_manage_categories = false
-    self.refinery_user_can_manage_places = false
+    self.refinery_user_can_manage_places = true
 
     self.social_buttons = true
 
@@ -49,7 +50,9 @@ module Refinery
     self.twitter_link = 'https://twitter.com/progressbarsk'
     self.mailinglist_link = '#mailing-list'
 
-
     self.theme = 'default'
+
+    # 0 -> Sunday, 1 -> Monday
+    self.first_day = 1
   end
 end

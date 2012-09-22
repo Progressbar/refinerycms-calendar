@@ -7,17 +7,19 @@ if (typeof Date.prototype.getDayOfYear === 'undefined') {
 var refinery = window.refinery || {};
 
 refinery.Calendar = function (config) {
-    var holder = $(config.holder);
-    var root_url = '/calendar/'
-    var source_url = root_url + 'archive/';
 
     var Calendar = {
         datepicker : '',
         current_date : '',
         initialized : false,
         data : [],
+        holder : null,
+        root_url : '/calendar/',
+        source_url : '/calendar/archive/',
+
+        // datepicker cfg
         defaultDate : null,
-        firstDay : 1, // monday
+        firstDay : 0,
 
         onChangeMonthYear : function (year, month, inst) {
             inst.settings.year = year;
@@ -48,7 +50,7 @@ refinery.Calendar = function (config) {
                     cover = $('<div />').appendTo(body);
 
                     $('<a>', {
-                        'href' : root_url + ev.slug,
+                        'href' : this.root_url + ev.slug,
                         'text' : ev.name
                     }).appendTo(cover);
                 }
@@ -102,8 +104,8 @@ refinery.Calendar = function (config) {
 
         setHolderState : function (state) {
             var states = ['load', 'error', 'initialized'];
-            holder.removeClass(states.join(' '));
-            holder.addClass(state);
+            this.holder.removeClass(states.join(' '));
+            this.holder.addClass(state);
         },
 
         loadData : function (year, month) {
@@ -111,7 +113,7 @@ refinery.Calendar = function (config) {
             that.setHolderState('load');
 
             $.ajax({
-                url : source_url + year + '/' + month,
+                url : that.source_url + year + '/' + month,
                 dataType : 'json',
                 type : 'GET',
                 error : function (response) {
@@ -145,18 +147,24 @@ refinery.Calendar = function (config) {
 
         init : function (config) {
             var that = this;
-            holder.html('');
+
+            this.holder = $(config.holder);
+            this.root_url = config.root_url || this.root_url;
+            this.source_url = config.source_url || this.source_url;
+            this.firstDay = config.first_day || this.firstDay;
+
+            this.holder.html('');
             if (typeof $.datepicker === 'undefined') {
                 var msg = 'Calendar require jQuery UI Datepicker.';
                 msg += '<br>Please add to your <b>application.js</b>:<br >';
                 msg += '<code>//= require jquery-ui</code>';
 
-                holder.html(msg);
+                this.holder.html(msg);
                 return false;
             }
 
-            this.datepicker = $('<div id="refinery-jquery-ui-calendar" />').appendTo(holder);
-            this.dialog = new refinery.Calendar.Dialog(holder);
+            this.datepicker = $('<div id="refinery-jquery-ui-calendar" />').appendTo(this.holder);
+            this.dialog = new refinery.Calendar.Dialog(this.holder);
 
             this.current_date = new Date();
             this.year = this.current_date.getFullYear();
