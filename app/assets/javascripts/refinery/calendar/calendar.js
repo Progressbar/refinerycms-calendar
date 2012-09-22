@@ -17,6 +17,7 @@ refinery.Calendar = function (config) {
         initialized : false,
         data : [],
         defaultDate : null,
+        firstDay : 1, // monday
 
         onChangeMonthYear : function (year, month, inst) {
             inst.settings.year = year;
@@ -142,7 +143,7 @@ refinery.Calendar = function (config) {
             });
         },
 
-        init : function() {
+        init : function (config) {
             var that = this;
             holder.html('');
             if (typeof $.datepicker === 'undefined') {
@@ -184,7 +185,7 @@ refinery.Calendar = function (config) {
         }
     }
 
-    return Calendar.init();
+    return Calendar.init(config);
 };
 
 refinery.Calendar.Dialog = function (holder) {
