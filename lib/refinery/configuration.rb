@@ -45,8 +45,8 @@ module Refinery
 
     self.social_buttons = true
 
-    self.facebook_link = 'https://twitter.com/progressbarsk'
-    self.twitter_link = 'https://www.facebook.com/progressbar'
+    self.facebook_link = 'https://www.facebook.com/progressbar'
+    self.twitter_link = 'https://twitter.com/progressbarsk'
     self.mailinglist_link = '#mailing-list'
 
 
