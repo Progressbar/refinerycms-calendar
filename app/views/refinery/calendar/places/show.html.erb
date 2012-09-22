@@ -52,6 +52,11 @@
 
       </footer>
     </div>
+    <% if @place.embed_map_link.present? %>
+    <div class="place-embed-map">
+      <iframe src="<%= @place.embed_map_link %>" scrolling="no" marginheight="0" marginwidth="0" frameborder="0"></iframe>
+    </div>
+    <% end %>
   </div>
 </div>
 <% end %>

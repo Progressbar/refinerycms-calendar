@@ -13,7 +13,7 @@ module Refinery
       attr_accessible :name, :description, :url, :image_id
       attr_accessible :phone, :email
       attr_accessible :address_country, :address_locality, :address_region, :postal_code, :street_address
-      attr_accessible :latitude, :longitude
+      attr_accessible :latitude, :longitude, :embed_map_link
 
       def title
         title = self.name

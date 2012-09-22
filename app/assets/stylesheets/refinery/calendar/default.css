@@ -249,3 +249,12 @@ a.ical {
 .ui-datepicker td a {
 	font-weight: bold;
 }
+
+/* place */
+
+.place-embed-map iframe {
+	border: none;
+	width: 100%;
+	height: 400px;
+	margin: 0px;
+}
