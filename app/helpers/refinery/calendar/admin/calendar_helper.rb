@@ -28,7 +28,7 @@ module Refinery
           new_start_object = @event.dates.new(:date_time => Time.now.tomorrow.change(:hour => 18, :minute => 0))
           new_end_object = @event.dates.new(:date_time => Time.now.tomorrow.change(:hour => 20, :minute => 0))
 
-          fields = '<div class="start-end-date-holder">'
+          fields = '<div class="start-end-date-holder" style="display: none;">'
           fields += f.fields_for(association, new_start_object, :child_index => "new_#{association}") do |builder|
             render(association.to_s.singularize + '_fields', :f => builder, 
               :start_date => true, 
