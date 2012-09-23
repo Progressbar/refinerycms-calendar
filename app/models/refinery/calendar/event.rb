@@ -33,7 +33,7 @@ module Refinery
 
 
       before_save :update_start_end_date
-      before_update :update_start_end_date
+      # before_update :update_start_end_date
 
 
       def current?
@@ -79,7 +79,7 @@ module Refinery
       class << self
 
         def upcoming
-          where('start_date >= ?', Time.now)
+          where('start_date >= ? OR (start_date < ? AND end_date >= ?)', Time.now, Time.now, Time.now)
         end
 
         def today
