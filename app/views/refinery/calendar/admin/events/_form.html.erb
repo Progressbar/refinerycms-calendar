@@ -230,13 +230,13 @@
 
           parent.before(content);
           var t = parent.parent()
-          t.find('.start-date').last().find('select').each(function () {
+          t.find('.start-date').last().find('select, input').each(function () {
             var elm = $(this);
             elm.attr('id', elm.attr('id').replace(regexp, new_start_id));
             elm.attr('name', elm.attr('name').replace(regexp, new_start_id));
           });
 
-          t.find('.end-date').last().find('select').each(function () {
+          t.find('.end-date').last().find('select, input').each(function () {
             var elm = $(this);
             elm.attr('id', elm.attr('id').replace(regexp, new_end_id));
             elm.attr('name', elm.attr('name').replace(regexp, new_end_id));
