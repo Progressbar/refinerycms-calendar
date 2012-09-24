@@ -34,7 +34,6 @@ module Refinery
           @events = @events.by_archive(@archive_date)
           render :json => @events.all
         else
-          p 'xxx' * 40
           if params[:month].present?
             date = "#{params[:month]}/#{params[:year]}"
             @archive_date = Time.parse(date)
@@ -44,7 +43,6 @@ module Refinery
               })
           else
             date = "01/#{params[:year]}"
-            p date
             @archive_date = Time.parse(date)
             @events = @events.by_year(@archive_date).paginate({
                 :page => params[:page],
