@@ -20,9 +20,9 @@ END:DAYLIGHT
 END:VTIMEZONE
 BEGIN:VEVENT
 UID:<%= @event.id %>@<%= request.host %>
-<%= ics_attr 'summary', event.title %>
-<%= ics_attr 'description', event.description %>
-<%= ics_attr 'location', event.place.title %>
+<%= ics_attr 'summary', @event.title %>
+<%= ics_attr 'description', @event.description %>
+<%= ics_attr 'location', @event.place.title %>
 URL:<%= refinery.calendar_event_url(@event) %>
 STATUS:CONFIRMED
 CLASS:PUBLIC
