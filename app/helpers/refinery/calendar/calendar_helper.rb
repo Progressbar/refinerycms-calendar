@@ -80,7 +80,7 @@ module Refinery
       def ics_attr attr_name, attr_value
         str = attr_value.to_s.gsub(/\r?\n/, " ")
         str = sanitize(str, :tags => ::Refinery::Calendar.html_allowed_tags, :attributes => ::Refinery::Calendar.html_allowed_tag_attributes)
-        str = %Q{#{attr_name.upcase}:#{str}}
+        str = %Q{#{attr_name.upcase}:#{str.html_safe}}
         ics_text str
       end
     end
