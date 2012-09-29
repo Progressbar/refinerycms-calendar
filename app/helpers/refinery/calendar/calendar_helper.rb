@@ -1,7 +1,7 @@
 module Refinery
   module Calendar
     module CalendarHelper
-      
+
       def smart_date_for event
         result = ''
 
@@ -32,7 +32,7 @@ module Refinery
 
         result.html_safe
       end
-      
+
       def events_archive_list events
         html = '<ul>'
         links = []
@@ -73,6 +73,16 @@ module Refinery
         html.html_safe
       end
 
+      def ics_text str
+        str.gsub(',', '\,').scan(/.{75}/).join("\r\n")
+      end
+
+      def ics_attr attr_name, attr_value
+        str = attr_value.to_s.gsub(/\r?\n/, " ")
+        str = sanitize(str, :tags => ::Refinery::Calendar.html_allowed_tags, :attributes => ::Refinery::Calendar.html_allowed_tag_attributes)
+        str = %Q{#{attr_name.upcase}:#{str}}
+        ics_text str
+      end
     end
   end
 end
