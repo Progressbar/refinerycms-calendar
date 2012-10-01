@@ -6,14 +6,14 @@ module Refinery
       extend FriendlyId
 
       friendly_id :title, :use => :slugged
- 
+
       belongs_to :place, :class_name => 'Refinery::Calendar::Place', :foreign_key => :location_id
       belongs_to :image, :class_name => 'Refinery::Image', :foreign_key => :image_id
       belongs_to :user, :class_name => 'Refinery::User', :foreign_key => :user_id
-      
+
       has_many :categorizations, :class_name => 'Refinery::Calendar::Categorization', :dependent => :destroy, :foreign_key => :calendar_event_id
       has_many :categories, :through => :categorizations, :source => :calendar_category
-      
+
       has_many :dates, :class_name => 'Refinery::Calendar::Date', :dependent => :destroy
 
       accepts_nested_attributes_for :dates
@@ -32,6 +32,8 @@ module Refinery
       acts_as_indexed :fields => [:title, :description]
 
 
+      default_scope order('start_date ASC')
+
       before_save :update_start_end_date
       # before_update :update_start_end_date
 
@@ -39,15 +41,15 @@ module Refinery
       def current?
         end_date >= Time.now
       end
-      
+
       def upcoming?
         start_date >= Time.now
       end
-      
+
       def archived?
         end_date < Time.now
       end
-      
+
       def featured?
         featured == true
       end
@@ -59,7 +61,7 @@ module Refinery
       def next
         Event.published_before.where(['start_date > ?', start_date]).first
       end
-      
+
       def prev
         Event.published_before.where(['start_date < ?', start_date]).reverse.first
       end
@@ -99,11 +101,11 @@ module Refinery
         def archive
           with_exclusive_scope { order('start_date DESC').live.where 'end_date < ?', Time.now }
         end
-        
+
         def by_archive archive_date
           with_exclusive_scope { order('start_date DESC').live.where 'start_date between ? and ?', archive_date.beginning_of_month, archive_date.end_of_month }
         end
-        
+
         def by_year archive_date
           where(['start_date between ? and ?', archive_date.beginning_of_year, archive_date.end_of_year])
         end
@@ -113,7 +115,7 @@ module Refinery
         end
 
       end
- 
+
       private
 
       def ends_after_start
