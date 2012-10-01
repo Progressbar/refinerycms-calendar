@@ -102,6 +102,13 @@ a.ical {
 
 #events .location {
 	float: right;
+	width: 35%;
+	text-align: right;
+	overflow: hidden;
+	white-space: nowrap;
+	-o-text-overflow: ellipsis;
+	-ms-text-overflow: ellipsis;
+	text-overflow: ellipsis;
 }
 
 #archives ul {
@@ -226,24 +233,24 @@ a.ical {
 }
 
 .ui-datepicker-header { position: relative; padding: 6px 0; }
-.ui-datepicker-prev, 
-.ui-datepicker-next { 
-	position: absolute; 
-	text-decoration: underline; 
+.ui-datepicker-prev,
+.ui-datepicker-next {
+	position: absolute;
+	text-decoration: underline;
 	cursor: pointer;
 }
 
 .ui-datepicker-prev { left: 0px; }
 .ui-datepicker-next { right: 0px; }
-.ui-datepicker-prev span, 
+.ui-datepicker-prev span,
 .ui-datepicker-next span { }
 .ui-datepicker-title { text-align: center; }
 
-.ui-datepicker td span, 
-.ui-datepicker td a { 
-	display: block; 
-	text-align: right; 
-	text-decoration: none; 
+.ui-datepicker td span,
+.ui-datepicker td a {
+	display: block;
+	text-align: right;
+	text-decoration: none;
 	padding: 6px 12px;
 }
 
