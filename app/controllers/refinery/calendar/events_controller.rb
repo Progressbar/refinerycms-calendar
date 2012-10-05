@@ -3,7 +3,7 @@ module Refinery
     class EventsController < CalendarController
 
       before_filter :get_events, :get_categories
-      
+
       def index
         @events = @events.upcoming.paginate({
             :page => params[:page],
@@ -28,7 +28,7 @@ module Refinery
       end
 
       def archive
-        if request.xhr?
+        if request.xhr? or request.format =~ 'json'
           date = "#{params[:month]}/#{params[:year]}"
           @archive_date = Time.parse(date)
           @events = @events.by_archive(@archive_date)
