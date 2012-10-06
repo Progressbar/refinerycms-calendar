@@ -32,7 +32,12 @@ module Refinery
           date = "#{params[:month]}/#{params[:year]}"
           @archive_date = Time.parse(date)
           @events = @events.by_archive(@archive_date)
-          render :json => @events.all
+
+          inc = [:image, :dates, :place, :categories].reject do |attr|
+            params[attr].nil? || params[attr].blank? || params[attr] == 'false' || params[attr] == '0'
+          end
+
+          render :json => @events.all.to_json(:include => inc)
         else
           if params[:month].present?
             date = "#{params[:month]}/#{params[:year]}"
