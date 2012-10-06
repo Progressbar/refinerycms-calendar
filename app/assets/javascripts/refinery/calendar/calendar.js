@@ -86,9 +86,18 @@ refinery.Calendar = function (config) {
 
             for (var i = 0, l = response.length; i < l; i++) {
                 ev = response[i];
-
-                for (var j = 0; j < ev.dates.length; j++) {
-                    tmp_date = new Date(ev.dates[j]['date_time']);
+                if (typeof ev.dates !== 'undefined' && ev.dates.length > 0) {
+                    for (var j = 0; j < ev.dates.length; j++) {
+                        tmp_date = new Date(ev.dates[j]['date_time']);
+                        key = tmp_date.getDate().toString() + tmp_date.getMonth().toString() + tmp_date.getFullYear().toString();
+                        this.data[key] = this.data[key] || [];
+                        if (this.data[key].indexOf(ev) === -1) {
+                            this.data[key].push(ev) ;
+                        }
+                    }
+                } else {
+                    // for backward compatibility
+                    tmp_date = new Date(ev.start_date);
                     key = tmp_date.getDate().toString() + tmp_date.getMonth().toString() + tmp_date.getFullYear().toString();
                     this.data[key] = this.data[key] || [];
                     if (this.data[key].indexOf(ev) === -1) {
