@@ -95,11 +95,11 @@ module Refinery
       end
 
       def ics_text str
-        fold_lines(quoted(str)).html_safe
+        quoted(fold_lines(str)).html_safe
       end
 
       def quoted(str)
-        str.gsub(/([;,"\\])/, '\\\1')
+        str.gsub(/([;,"\\])/, '\\\\\1')
       end
 
       def ics_attr attr_name, attr_value
