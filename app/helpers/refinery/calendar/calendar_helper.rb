@@ -2,6 +2,8 @@ module Refinery
   module Calendar
     module CalendarHelper
 
+      LINELENGTH = 75
+
       def smart_date_for event
         result = ''
 
@@ -73,8 +75,31 @@ module Refinery
         html.html_safe
       end
 
+      # Make sure that no line is longer than LINELENTH octets (excl. the
+      # newline character)
+      def fold_lines(str)
+        newStr = ''
+        bytes = 0
+        str.each_char do |c|
+          cBytes = c.bytesize
+          if bytes + cBytes > LINELENGTH && c != "\n"
+            newStr += "\r\n "
+            bytes = 0
+          else
+            bytes += cBytes
+          end
+          newStr << c
+        end
+
+        newStr
+      end
+
       def ics_text str
-        str.gsub(',', '\,').scan(/.{1,75}/m).join("\r\n").html_safe
+        fold_lines(quoted(str)).html_safe
+      end
+
+      def quoted(str)
+        str.gsub(/([;,"\\])/, '\\\1')
       end
 
       def ics_attr attr_name, attr_value
