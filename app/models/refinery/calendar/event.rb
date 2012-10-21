@@ -35,8 +35,6 @@ module Refinery
       default_scope order('start_date ASC')
 
       before_save :update_start_end_date
-      # before_update :update_start_end_date
-
 
       def current?
         end_date >= Time.now
@@ -81,11 +79,15 @@ module Refinery
       class << self
 
         def upcoming
-          where('start_date >= ? OR (start_date < ? AND end_date >= ?)', Time.now, Time.now, Time.now)
+          where('start_date >= ?', Time.now)
         end
 
         def today
           where('start_date between ? and ?', Time.now.beginning_of_day, Time.now.end_of_day)
+        end
+
+        def current
+           where('start_date <= ? AND end_date >= ?', Time.now, Time.now)
         end
 
         def featured
@@ -102,12 +104,16 @@ module Refinery
           with_exclusive_scope { order('start_date DESC').live.where 'end_date < ?', Time.now }
         end
 
-        def by_archive archive_date
-          with_exclusive_scope { order('start_date DESC').live.where 'start_date between ? and ?', archive_date.beginning_of_month, archive_date.end_of_month }
+        def by_range beginning_of_range, end_of_range
+          with_exclusive_scope { order('start_date DESC').live.where 'start_date between ? and ?', beginning_of_range, end_of_range }
+        end
+
+        def by_month archive_date
+          by_range(archive_date.beginning_of_month, archive_date.end_of_month)
         end
 
         def by_year archive_date
-          where(['start_date between ? and ?', archive_date.beginning_of_year, archive_date.end_of_year])
+          by_range(archive_date.beginning_of_year, archive_date.end_of_year)
         end
 
         def for_archive_list

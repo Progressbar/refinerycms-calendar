@@ -42,18 +42,17 @@ module Refinery
           if params[:month].present?
             date = "#{params[:month]}/#{params[:year]}"
             @archive_date = Time.parse(date)
-            @events = @events.by_archive(@archive_date).paginate({
-                :page => params[:page],
-                :per_page => ::Refinery::Calendar.events_per_page
-              })
+            @events = @events.by_month(@archive_date)
           else
             date = "01/#{params[:year]}"
             @archive_date = Time.parse(date)
-            @events = @events.by_year(@archive_date).paginate({
+            @events = @events.by_year(@archive_date)
+          end
+
+          @events = @events.paginate({
                 :page => params[:page],
                 :per_page => ::Refinery::Calendar.events_per_page
               })
-          end
 
           present (@page)
         end
