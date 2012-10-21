@@ -14,12 +14,12 @@ module Refinery
           plugin.activity = {
             :class_name => :'refinery/calendar/event'
           }
-          plugin.menu_match = %r{refinery/calendar(/.*)?$}
+          plugin.menu_match = %r{refinery/calendar\/?(.*)?$}
         end
       end
 
       config.after_initialize do
-        Refinery.register_extension(Refinery::Events)
+        Refinery.register_extension(Refinery::Calendar)
       end
     end
   end
