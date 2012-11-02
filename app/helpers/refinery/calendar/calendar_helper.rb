@@ -55,7 +55,7 @@ module Refinery
           year = l.split('/')[1]
           prev_year = year unless prev_year
           month = l.split('/')[0]
-          count = Event.live.by_archive(Time.parse(l)).size
+          count = Event.live.by_month(Time.parse(l)).size
           text = t("date.month_names")[month.to_i] + " #{year} (#{count})"
           html << "</ul><ul>" if prev_year != year
           html << "<li>"

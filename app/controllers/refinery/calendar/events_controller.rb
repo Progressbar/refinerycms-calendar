@@ -31,7 +31,7 @@ module Refinery
         if request.xhr? or request.format =~ 'json'
           date = "#{params[:month]}/#{params[:year]}"
           @archive_date = Time.parse(date)
-          @events = @events.by_archive(@archive_date) unless @events.empty?
+          @events = @events.by_month(@archive_date)
 
           inc = [:image, :dates, :place, :categories].reject do |attr|
             params[attr].nil? || params[attr].blank? || params[attr] == 'false' || params[attr] == '0'
