@@ -22,8 +22,8 @@ module Refinery
     self.events_tzname = 'CET'
 
     # sanitization
-    self.html_allowed_tags = %w(a acronym b strong i em li ul ol h1 h2 h3 h4 h5 h6 blockquote br cite sub sup ins p div span table tr td thead tbody tfoot img)
-    self.html_allowed_tag_attributes = %w(href title src id class alt)
+    self.html_allowed_tags = %w(a acronym b strong i em li ul ol h1 h2 h3 h4 h5 h6 blockquote br cite sub sup ins p div span table tr td thead tbody tfoot img iframe)
+    self.html_allowed_tag_attributes = %w(href title src id class alt width height allowfullscreen frameborder)
 
     # acl
     self.refinery_user_can_manage_events = false
